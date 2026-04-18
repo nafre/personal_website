@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#6366F1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0B0B0E" media="(prefers-color-scheme: dark)" />
+
+    <!-- Primary Meta -->
+    <!-- KEEP IN SYNC with src/data/content.js: site.name, site.role -->
+    <title>Mohamed Erfan — Backend Engineer | Fintech, Payments &amp; Insurance Infrastructure</title>
+    <meta
+      name="description"
+      content="Mohamed Erfan is a backend engineer in Kuala Lumpur with 6+ years in fintech — building Mastercard's payment gateway and Guidewire's APAC insurance platform. Specialises in Java, Spring Boot, Kafka, and distributed systems at scale."
+    />
+    <meta name="author" content="Mohamed Erfan" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <link rel="canonical" href="https://erfan.dev/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://erfan.dev/" />
+    <meta property="og:site_name" content="Mohamed Erfan" />
+    <meta property="og:title" content="Mohamed Erfan — Backend Engineer | Fintech &amp; Payments" />
+    <meta
+      property="og:description"
+      content="Backend engineer with 6+ years in fintech — building Mastercard's payment gateway and Guidewire's APAC insurance platform. Java, Spring Boot, Kafka, distributed systems at scale."
+    />
+    <meta property="og:image" content="https://erfan.dev/og.png" />
+    <meta property="og:image:alt" content="Mohamed Erfan — Backend Engineer portfolio" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mohamed Erfan — Backend Engineer | Fintech &amp; Payments" />
+    <meta
+      name="twitter:description"
+      content="Backend engineer with 6+ years in fintech — building Mastercard's payment gateway and Guidewire's APAC insurance platform. Java, Spring Boot, Kafka, distributed systems at scale."
+    />
+    <meta name="twitter:image" content="https://erfan.dev/og.png" />
+    <meta name="twitter:image:alt" content="Mohamed Erfan — Backend Engineer portfolio" />
+
+    <!-- Fonts: preconnect first, then load non-blocking via media trick -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
+
+    <!-- Prevent FOUC on theme -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored || (prefersDark ? 'dark' : 'light');
+          if (theme === 'dark') document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+
+    <!-- JSON-LD: Person schema -->
+    <!--
+      KEEP IN SYNC with src/data/content.js — these fields are NOT auto-synced:
+        name, jobTitle  → site.name, site.role
+        email           → site.email
+        worksFor.name   → experience[0].company (current employer)
+        sameAs URLs     → site.socials.github, site.socials.linkedin
+    -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mohamed Erfan",
+        "givenName": "Erfan",
+        "jobTitle": "Software Engineer",
+        "description": "Backend engineer in Kuala Lumpur with 6+ years in fintech — building Mastercard's payment gateway and Guidewire's APAC insurance platform. Specialises in Java, Spring Boot, Kafka, and distributed systems at scale.",
+        "url": "https://erfan.dev",
+        "email": "mailto:erfansiraj97@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Kuala Lumpur",
+          "addressCountry": "MY"
+        },
+        "worksFor": {
+          "@type": "Organization",
+          "name": "Endava"
+        },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "Universiti Sains Malaysia"
+        },
+        "knowsAbout": [
+          "Java", "Spring Boot", "TypeScript", "JavaScript", "React",
+          "PostgreSQL", "Apache Kafka", "Docker", "System Design", "API Design",
+          "Distributed Systems", "CI/CD", "Software Architecture"
+        ],
+        "sameAs": [
+          "https://github.com/",
+          "https://www.linkedin.com/"
+        ]
+      }
+    </script>
+  </head>
+  <body class="antialiased bg-white text-ink-900 dark:bg-ink-900 dark:text-ink-100">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-ink-900 focus:text-white focus:px-3 focus:py-2"
+    >
+      Skip to content
+    </a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
