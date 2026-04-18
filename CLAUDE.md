@@ -1,6 +1,17 @@
-# CLAUDE.md — Portfolio Project Guide
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 React 18 + Vite + Tailwind CSS + Framer Motion. Single-page portfolio, no client-side routing — hash anchors only (`#work`, `#about`, etc.).
+
+## Commands
+
+```bash
+npm run dev       # start dev server (localhost:5173)
+npm run build     # production build → dist/
+npm run preview   # serve the dist/ build locally
+npm run lint      # run ESLint on src/
+```
 
 ## File Map
 
@@ -71,7 +82,7 @@ React 18 + Vite + Tailwind CSS + Framer Motion. Single-page portfolio, no client
 ## Known Intentional Choices
 
 - **Contact form uses `mailto:` fallback** — no backend; form `onSubmit` fires `window.location.href = mailto:...`. This is intentional.
-- **`"lint": "echo lint"` stub** — ESLint is not configured. Run `npm run lint` will echo a message, not lint.
+- **ESLint is configured** — `eslint src` runs via `npm run lint`; config is in `eslint.config.js` with `react-hooks` and `react-refresh` plugins.
 - **Social links may be bare root URLs** — `site.socials.github` / `site.socials.linkedin` in `content.js` may be placeholder root URLs if not yet filled in.
 - **Per-project gradient strings** — `accent` and `accentGradient` fields on each project in `content.js` are intentional per-project Tailwind gradient classes, not global tokens.
 - **JSON-LD in `index.html` is static** — it is not read from `content.js` at build time. Must be updated manually when name, email, employer, or social links change.
