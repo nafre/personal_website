@@ -31,6 +31,20 @@ export default function About() {
           </Reveal>
 
           <Reveal delay={0.2} x={20} className="md:col-span-2">
+            {site.photo && (
+              <div className="mb-6 flex justify-center md:justify-start">
+                <div className="relative h-36 w-36">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent to-violet-500 p-0.5">
+                    <div className="h-full w-full rounded-full bg-white dark:bg-ink-900" />
+                  </div>
+                  <img
+                    src={site.photo}
+                    alt={site.name}
+                    className="absolute inset-0.5 h-[calc(100%-4px)] w-[calc(100%-4px)] rounded-full object-cover object-top"
+                  />
+                </div>
+              </div>
+            )}
             <dl className="card space-y-4 bg-white/60 backdrop-blur-sm dark:bg-ink-800/40">
               {[
                 { k: 'Based in', v: site.location },

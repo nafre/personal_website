@@ -28,9 +28,10 @@ export const site = {
   ],
   focus: 'Backend, design systems',
   availability: 'Available for full-time roles — Q3 2026',
+  photo: '/images/avatar.jpg', // place your photo at public/images/avatar.jpg; set to '' to hide
   socials: {
-    github: 'https://github.com/', // placeholder — update before deployment
-    linkedin: 'https://www.linkedin.com/', // placeholder — update before deployment
+    github: 'https://github.com/nafre/', 
+    linkedin: 'https://www.linkedin.com/in/mohderfan/', 
     email: 'mailto:erfansiraj97@gmail.com',
   },
 }
