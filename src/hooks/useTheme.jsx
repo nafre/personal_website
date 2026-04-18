@@ -1,8 +1,13 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 
-const ThemeContext = createContext({ theme: 'light', toggle: () => {}, setTheme: () => {} })
+const ThemeContext = createContext({ theme: 'light', toggle: () => {}, setTheme: () => {}, colorTheme: 'electric-indigo' })
 
 export function ThemeProvider({ children }) {
+  const [colorTheme] = useState(() => {
+    if (typeof window === 'undefined') return 'electric-indigo'
+    try { return sessionStorage.getItem('colorTheme') || 'electric-indigo' } catch (_) { return 'electric-indigo' }
+  })
+
   const [theme, setThemeState] = useState(() => {
     if (typeof window === 'undefined') return 'light'
     try {
@@ -32,7 +37,7 @@ export function ThemeProvider({ children }) {
   )
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, toggle }}>
+    <ThemeContext.Provider value={{ theme, setTheme, toggle, colorTheme }}>
       {children}
     </ThemeContext.Provider>
   )

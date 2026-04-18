@@ -34,7 +34,7 @@ export default function Experience() {
               <motion.span
                 aria-hidden="true"
                 className="absolute left-0 top-1.5 inline-flex h-3 w-3 -translate-x-1/2 items-center justify-center rounded-full border-2 border-white bg-accent dark:border-ink-900"
-                style={{ boxShadow: '0 0 0 3px rgba(99, 102, 241, 0.2)' }}
+                style={{ boxShadow: '0 0 0 3px rgba(var(--color-accent-rgb), 0.2)' }}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: [0, 1.3, 1] }}
                 viewport={{ once: true, amount: 1 }}

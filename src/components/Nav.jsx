@@ -38,7 +38,7 @@ export default function Nav() {
         style={{
           scaleX,
           transformOrigin: 'left',
-          background: 'linear-gradient(90deg, #6366F1 0%, #8B5CF6 60%, #A78BFA 100%)',
+          background: 'linear-gradient(90deg, var(--color-accent) 0%, var(--color-secondary) 60%, var(--color-secondary-soft) 100%)',
         }}
         className="absolute inset-x-0 top-0 h-[2px] pointer-events-none"
       />
@@ -55,8 +55,8 @@ export default function Nav() {
             aria-hidden="true"
             className="inline-flex h-7 w-7 items-center justify-center rounded-lg transition-all duration-300 group-hover:-rotate-6 group-hover:scale-105"
             style={{
-              background: 'linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%)',
-              boxShadow: '0 2px 8px rgba(99, 102, 241, 0.4)',
+              background: 'linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%)',
+              boxShadow: '0 2px 8px rgba(var(--color-accent-rgb), 0.4)',
             }}
           >
             <span className="font-display text-sm font-semibold leading-none text-white">E</span>

@@ -65,14 +65,75 @@
       />
     </noscript>
 
-    <!-- Prevent FOUC on theme -->
+    <!-- Prevent FOUC: applies dark/light mode and randomises colour palette before first paint -->
     <script>
       (function () {
         try {
+          // Dark / light mode
           var stored = localStorage.getItem('theme');
           var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
           var theme = stored || (prefersDark ? 'dark' : 'light');
           if (theme === 'dark') document.documentElement.classList.add('dark');
+
+          // Random colour palette — new pick on every full page load
+          var palettes = [
+            {
+              name: 'electric-indigo',
+              accent: '#6366F1', accentSoft: '#818CF8', accentDeep: '#4F46E5',
+              accentRgb: '99, 102, 241', accentSoftRgb: '129, 140, 248',
+              secondary: '#8B5CF6', secondarySoft: '#A78BFA', secondaryDeep: '#7C3AED',
+              secondaryRgb: '139, 92, 246', secondarySoftRgb: '167, 139, 250',
+            },
+            {
+              name: 'ocean-blue',
+              accent: '#2563EB', accentSoft: '#60A5FA', accentDeep: '#1D4ED8',
+              accentRgb: '37, 99, 235', accentSoftRgb: '96, 165, 250',
+              secondary: '#38BDF8', secondarySoft: '#7DD3FC', secondaryDeep: '#0284C7',
+              secondaryRgb: '56, 189, 248', secondarySoftRgb: '125, 211, 252',
+            },
+            {
+              name: 'emerald-coast',
+              accent: '#10B981', accentSoft: '#34D399', accentDeep: '#059669',
+              accentRgb: '16, 185, 129', accentSoftRgb: '52, 211, 153',
+              secondary: '#14B8A6', secondarySoft: '#2DD4BF', secondaryDeep: '#0D9488',
+              secondaryRgb: '20, 184, 166', secondarySoftRgb: '45, 212, 191',
+            },
+            {
+              name: 'royal-violet',
+              accent: '#7C3AED', accentSoft: '#8B5CF6', accentDeep: '#6D28D9',
+              accentRgb: '124, 58, 237', accentSoftRgb: '139, 92, 246',
+              secondary: '#A855F7', secondarySoft: '#C084FC', secondaryDeep: '#9333EA',
+              secondaryRgb: '168, 85, 247', secondarySoftRgb: '192, 132, 252',
+            },
+            {
+              name: 'amber-gold',
+              accent: '#D97706', accentSoft: '#F59E0B', accentDeep: '#B45309',
+              accentRgb: '217, 119, 6', accentSoftRgb: '245, 158, 11',
+              secondary: '#EAB308', secondarySoft: '#FACC15', secondaryDeep: '#CA8A04',
+              secondaryRgb: '234, 179, 8', secondarySoftRgb: '250, 204, 21',
+            },
+            {
+              name: 'cobalt-sky',
+              accent: '#3B82F6', accentSoft: '#60A5FA', accentDeep: '#2563EB',
+              accentRgb: '59, 130, 246', accentSoftRgb: '96, 165, 250',
+              secondary: '#818CF8', secondarySoft: '#A5B4FC', secondaryDeep: '#6366F1',
+              secondaryRgb: '129, 140, 248', secondarySoftRgb: '165, 180, 252',
+            },
+          ];
+
+          var p = palettes[Math.floor(Math.random() * palettes.length)];
+          var r = document.documentElement;
+          r.style.setProperty('--color-accent', p.accent);
+          r.style.setProperty('--color-accent-soft', p.accentSoft);
+          r.style.setProperty('--color-accent-deep', p.accentDeep);
+          r.style.setProperty('--color-accent-rgb', p.accentRgb);
+          r.style.setProperty('--color-accent-soft-rgb', p.accentSoftRgb);
+          r.style.setProperty('--color-secondary', p.secondary);
+          r.style.setProperty('--color-secondary-soft', p.secondarySoft);
+          r.style.setProperty('--color-secondary-deep', p.secondaryDeep);
+          r.style.setProperty('--color-secondary-rgb', p.secondaryRgb);
+          r.style.setProperty('--color-secondary-soft-rgb', p.secondarySoftRgb);
+          try { sessionStorage.setItem('colorTheme', p.name); } catch (_) {}
         } catch (e) {}
       })();
     </script>

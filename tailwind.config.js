@@ -29,18 +29,17 @@ export default {
           800: '#17171B',
           900: '#0B0B0E',
         },
-        // Single accent — Electric Indigo
+        // Accent + secondary — resolved at runtime via CSS custom properties
         accent: {
-          DEFAULT: '#6366F1',
-          soft: '#818CF8',
-          deep: '#4F46E5',
-          ring: 'rgba(99, 102, 241, 0.35)',
+          DEFAULT: 'var(--color-accent)',
+          soft: 'var(--color-accent-soft)',
+          deep: 'var(--color-accent-deep)',
+          ring: 'rgba(var(--color-accent-rgb), 0.35)',
         },
-        // Secondary accent — Violet
         violet: {
-          DEFAULT: '#8B5CF6',
-          soft: '#A78BFA',
-          deep: '#7C3AED',
+          DEFAULT: 'var(--color-secondary)',
+          soft: 'var(--color-secondary-soft)',
+          deep: 'var(--color-secondary-deep)',
         },
       },
       fontFamily: {
@@ -82,9 +81,9 @@ export default {
       boxShadow: {
         soft: '0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(17,17,17,0.06)',
         'soft-dark': '0 1px 2px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.45)',
-        ring: '0 0 0 1px rgba(99,102,241,0.35), 0 0 0 4px rgba(99,102,241,0.12)',
-        'glow-accent': '0 0 0 1px rgba(99,102,241,0.2), 0 4px 32px rgba(99,102,241,0.22), 0 1px 2px rgba(0,0,0,0.08)',
-        'glow-accent-dark': '0 0 0 1px rgba(99,102,241,0.3), 0 4px 40px rgba(99,102,241,0.35), 0 1px 2px rgba(0,0,0,0.5)',
+        ring: '0 0 0 1px rgba(var(--color-accent-rgb),0.35), 0 0 0 4px rgba(var(--color-accent-rgb),0.12)',
+        'glow-accent': '0 0 0 1px rgba(var(--color-accent-rgb),0.2), 0 4px 32px rgba(var(--color-accent-rgb),0.22), 0 1px 2px rgba(0,0,0,0.08)',
+        'glow-accent-dark': '0 0 0 1px rgba(var(--color-accent-rgb),0.3), 0 4px 40px rgba(var(--color-accent-rgb),0.35), 0 1px 2px rgba(0,0,0,0.5)',
       },
       transitionTimingFunction: {
         smooth: 'cubic-bezier(0.22, 1, 0.36, 1)',

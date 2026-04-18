@@ -4,6 +4,19 @@
 
 /* === BASE === html/body, noise texture, dark mode overrides, motion reduction, selection */
 @layer base {
+  :root {
+    --color-accent: #6366F1;
+    --color-accent-soft: #818CF8;
+    --color-accent-deep: #4F46E5;
+    --color-accent-rgb: 99, 102, 241;
+    --color-accent-soft-rgb: 129, 140, 248;
+    --color-secondary: #8B5CF6;
+    --color-secondary-soft: #A78BFA;
+    --color-secondary-deep: #7C3AED;
+    --color-secondary-rgb: 139, 92, 246;
+    --color-secondary-soft-rgb: 167, 139, 250;
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
@@ -13,8 +26,8 @@
   body {
     font-feature-settings: 'ss01', 'cv11';
     background-image:
-      radial-gradient(ellipse 900px 600px at 20% -5%, rgba(99, 102, 241, 0.09), transparent 55%),
-      radial-gradient(ellipse 700px 500px at 85% 110%, rgba(139, 92, 246, 0.07), transparent 50%);
+      radial-gradient(ellipse 900px 600px at 20% -5%, rgba(var(--color-accent-rgb), 0.09), transparent 55%),
+      radial-gradient(ellipse 700px 500px at 85% 110%, rgba(var(--color-secondary-rgb), 0.07), transparent 50%);
     background-attachment: fixed;
   }
 
@@ -32,8 +45,8 @@
 
   .dark body {
     background-image:
-      radial-gradient(ellipse 900px 600px at 20% -5%, rgba(99, 102, 241, 0.18), transparent 55%),
-      radial-gradient(ellipse 700px 500px at 85% 110%, rgba(139, 92, 246, 0.14), transparent 50%);
+      radial-gradient(ellipse 900px 600px at 20% -5%, rgba(var(--color-accent-rgb), 0.18), transparent 55%),
+      radial-gradient(ellipse 700px 500px at 85% 110%, rgba(var(--color-secondary-rgb), 0.14), transparent 50%);
     background-attachment: fixed;
   }
 
@@ -42,7 +55,7 @@
   }
 
   ::selection {
-    background: rgba(99, 102, 241, 0.25);
+    background: rgba(var(--color-accent-rgb), 0.25);
     color: inherit;
   }
 
@@ -74,8 +87,8 @@
   .section-eyebrow {
     @apply inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium uppercase tracking-[0.18em];
     color: theme('colors.accent.DEFAULT');
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.05));
-    border: 1px solid rgba(99, 102, 241, 0.15);
+    background: linear-gradient(135deg, rgba(var(--color-accent-rgb), 0.08), rgba(var(--color-secondary-rgb), 0.05));
+    border: 1px solid rgba(var(--color-accent-rgb), 0.15);
   }
 
   .section-eyebrow::before {
@@ -84,8 +97,8 @@
 
   .dark .section-eyebrow {
     color: theme('colors.accent.soft');
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(139, 92, 246, 0.08));
-    border-color: rgba(129, 140, 248, 0.2);
+    background: linear-gradient(135deg, rgba(var(--color-accent-rgb), 0.12), rgba(var(--color-secondary-rgb), 0.08));
+    border-color: rgba(var(--color-accent-soft-rgb), 0.2);
   }
 
   .heading-display {
@@ -97,11 +110,11 @@
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-all duration-300 ease-smooth focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-ink-900;
   }
 
-  /* Primary — indigo→violet gradient with shimmer sweep */
+  /* Primary — accent→secondary gradient with shimmer sweep */
   .btn-primary {
     @apply btn relative overflow-hidden text-white;
-    background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(99, 102, 241, 0.35);
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-secondary) 100%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(var(--color-accent-rgb), 0.35);
   }
 
   .btn-primary::after {
@@ -125,7 +138,7 @@
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), 0 8px 28px rgba(99, 102, 241, 0.45);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18), 0 8px 28px rgba(var(--color-accent-rgb), 0.45);
   }
 
   .btn-primary:active {
@@ -133,13 +146,13 @@
   }
 
   .dark .btn-primary {
-    background: linear-gradient(135deg, #818CF8 0%, #A78BFA 100%);
+    background: linear-gradient(135deg, var(--color-accent-soft) 0%, var(--color-secondary-soft) 100%);
     color: #0B0B0E;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5), 0 4px 20px rgba(var(--color-accent-rgb), 0.4);
   }
 
   .dark .btn-primary:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(99, 102, 241, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5), 0 8px 32px rgba(var(--color-accent-rgb), 0.5);
   }
 
   .btn-ghost {
@@ -159,7 +172,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.5), rgba(139, 92, 246, 0.25), rgba(99, 102, 241, 0.5));
+    background: linear-gradient(135deg, rgba(var(--color-accent-rgb), 0.5), rgba(var(--color-secondary-rgb), 0.25), rgba(var(--color-accent-rgb), 0.5));
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -169,7 +182,7 @@
   }
 
   .btn-outline:hover::before {
-    background: linear-gradient(135deg, #6366F1, #8B5CF6, #6366F1);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-secondary), var(--color-accent));
   }
 
   .btn-outline:hover {
@@ -182,7 +195,7 @@
   }
 
   .dark .btn-outline::before {
-    background: linear-gradient(135deg, rgba(129, 140, 248, 0.45), rgba(167, 139, 250, 0.25), rgba(129, 140, 248, 0.45));
+    background: linear-gradient(135deg, rgba(var(--color-accent-soft-rgb), 0.45), rgba(var(--color-secondary-soft-rgb), 0.25), rgba(var(--color-accent-soft-rgb), 0.45));
   }
 
   .dark .btn-outline:hover {
@@ -200,7 +213,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(145deg, rgba(99, 102, 241, 0.12), rgba(17, 17, 17, 0.06) 40%, rgba(139, 92, 246, 0.08));
+    background: linear-gradient(145deg, rgba(var(--color-accent-rgb), 0.12), rgba(17, 17, 17, 0.06) 40%, rgba(var(--color-secondary-rgb), 0.08));
     -webkit-mask:
       linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
@@ -211,11 +224,11 @@
   }
 
   .dark .card::before {
-    background: linear-gradient(145deg, rgba(99, 102, 241, 0.18), rgba(255, 255, 255, 0.04) 40%, rgba(139, 92, 246, 0.12));
+    background: linear-gradient(145deg, rgba(var(--color-accent-rgb), 0.18), rgba(255, 255, 255, 0.04) 40%, rgba(var(--color-secondary-rgb), 0.12));
   }
 
   .card:hover::before {
-    background: linear-gradient(145deg, rgba(99, 102, 241, 0.4), rgba(139, 92, 246, 0.15) 50%, rgba(99, 102, 241, 0.25));
+    background: linear-gradient(145deg, rgba(var(--color-accent-rgb), 0.4), rgba(var(--color-secondary-rgb), 0.15) 50%, rgba(var(--color-accent-rgb), 0.25));
   }
 
   .link-subtle {
@@ -225,14 +238,14 @@
   /* Chip — accent-tinted */
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium;
-    background: rgba(99, 102, 241, 0.05);
-    border: 1px solid rgba(99, 102, 241, 0.12);
+    background: rgba(var(--color-accent-rgb), 0.05);
+    border: 1px solid rgba(var(--color-accent-rgb), 0.12);
     color: theme('colors.accent.deep');
   }
 
   .dark .chip {
-    background: rgba(99, 102, 241, 0.08);
-    border-color: rgba(129, 140, 248, 0.18);
+    background: rgba(var(--color-accent-rgb), 0.08);
+    border-color: rgba(var(--color-accent-soft-rgb), 0.18);
     color: theme('colors.accent.soft');
   }
 
@@ -255,9 +268,9 @@
   .accent-underline {
     background-image: linear-gradient(
       90deg,
-      rgba(99, 102, 241, 0.9),
-      rgba(139, 92, 246, 0.9),
-      rgba(99, 102, 241, 0.9)
+      rgba(var(--color-accent-rgb), 0.9),
+      rgba(var(--color-secondary-rgb), 0.9),
+      rgba(var(--color-accent-rgb), 0.9)
     );
     background-size: 200% 100%;
     -webkit-background-clip: text;
@@ -278,7 +291,7 @@
     bottom: 0.125rem;
     height: 1.5px;
     border-radius: 9999px;
-    background: linear-gradient(90deg, #6366F1, #8B5CF6);
+    background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
@@ -296,12 +309,12 @@
   .form-input:focus {
     border-color: theme('colors.accent.DEFAULT');
     background: white;
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12), 0 1px 2px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.12), 0 1px 2px rgba(0, 0, 0, 0.05);
   }
 
   .dark .form-input:focus {
     background: theme('colors.ink.900');
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 0 3px rgba(var(--color-accent-rgb), 0.2), 0 1px 2px rgba(0, 0, 0, 0.3);
   }
 
   /* Social icon link — gradient fill on hover via ::before */
@@ -315,7 +328,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #6366F1, #8B5CF6);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-secondary));
     opacity: 0;
     transition: opacity 0.25s ease;
     border-radius: inherit;
@@ -337,17 +350,18 @@
 
   /* Experience timeline */
   .timeline {
-    @apply relative mt-14;
+    @apply mt-14;
   }
 
-  .timeline::before {
+  /* Per-item connector: dot-center to next dot-center, skips the last item */
+  .timeline > li:not(:last-child)::before {
     content: '';
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
+    top: 0.75rem;      /* dot center: top-1.5 (6px) + h-3/2 (6px) */
+    bottom: -0.75rem;  /* extends exactly to next dot center */
+    left: 0.375rem;    /* dot center: w-3/2 = 6px (Framer Motion overrides -translate-x-1/2) */
     width: 1px;
-    background: linear-gradient(to bottom, rgba(99, 102, 241, 0.5) 0%, rgba(99, 102, 241, 0.15) 60%, transparent 100%);
+    background: linear-gradient(to bottom, rgba(var(--color-accent-rgb), 0.45), rgba(var(--color-accent-rgb), 0.15));
   }
 }
 
@@ -382,13 +396,28 @@
 }
 
 .orb-a {
+  background: rgba(var(--color-accent-rgb), 0.09);
   animation: orb-float-a 22s ease-in-out infinite alternate;
 }
 
+.dark .orb-a {
+  background: rgba(var(--color-accent-rgb), 0.15);
+}
+
 .orb-b {
+  background: rgba(var(--color-secondary-rgb), 0.08);
   animation: orb-float-b 26s ease-in-out infinite alternate;
 }
 
+.dark .orb-b {
+  background: rgba(var(--color-secondary-rgb), 0.14);
+}
+
 .orb-c {
+  background: rgba(var(--color-accent-rgb), 0.05);
   animation: orb-float-c 32s ease-in-out infinite alternate;
+}
+
+.dark .orb-c {
+  background: rgba(var(--color-accent-rgb), 0.09);
 }

@@ -31,9 +31,9 @@ export default function Hero() {
       />
       {/* Animated gradient orbs — three layers for depth */}
       <div aria-hidden="true" className="pointer-events-none select-none">
-        <div className="orb-a absolute -left-40 -top-28 h-[700px] w-[700px] rounded-full bg-indigo-500/[0.09] blur-[100px] dark:bg-indigo-400/[0.15]" />
-        <div className="orb-b absolute -bottom-32 -right-40 h-[550px] w-[550px] rounded-full bg-violet-500/[0.08] blur-[90px] dark:bg-violet-400/[0.14]" />
-        <div className="orb-c absolute right-[10%] top-[30%] h-[300px] w-[300px] rounded-full bg-indigo-400/[0.05] blur-[70px] dark:bg-indigo-300/[0.09]" />
+        <div className="orb-a absolute -left-40 -top-28 h-[700px] w-[700px] rounded-full blur-[100px]" />
+        <div className="orb-b absolute -bottom-32 -right-40 h-[550px] w-[550px] rounded-full blur-[90px]" />
+        <div className="orb-c absolute right-[10%] top-[30%] h-[300px] w-[300px] rounded-full blur-[70px]" />
       </div>
       <div className="container-narrow relative">
         <motion.div
