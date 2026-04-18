@@ -168,8 +168,8 @@ export const stats = {
 
 /** @type {NavLink[]} */
 export const navLinks = [
-  { href: '#work', label: 'Work' },
   { href: '#about', label: 'About' },
+  { href: '#work', label: 'Work' },
   { href: '#experience', label: 'Experience' },
   { href: '#skills', label: 'Skills' },
   { href: '#contact', label: 'Contact' },
