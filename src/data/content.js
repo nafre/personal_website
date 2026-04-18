@@ -21,7 +21,7 @@ export const site = {
   location: 'Kuala Lumpur, Malaysia',
   email: 'erfansiraj97@gmail.com',
   shortBio:
-    "I design and build the systems you don't see—but rely on every day.",
+    "I design and build the systems you don't see, but rely on every day.",
   longBio: [
     "Six years ago I wrote my first production Java service. Since then I've been in the backend trenches of fintech — four years building Guidewire's localized insurance platform across APAC, and now working on Mastercard's payment processor at Endava. The common thread: systems where failure isn't an option.",
     "My best work lives where engineering rigor meets product thinking: APIs that are easy to reason about, services that hold under load, and codebases the next team can actually maintain. I've led a team through a full release cycle and mentored engineers along the way. I write things down.",
@@ -138,7 +138,7 @@ export const skills = [
   },
   {
     group: 'Craft',
-    items: ['System design', 'API design', 'Design systems', 'Technical writing', 'Mentoring'],
+    items: ['System design', 'API design', 'Design systems', 'Mentoring'],
   },
   {
     group: 'A.I.',
