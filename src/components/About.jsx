@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import Reveal from './Reveal.jsx'
 import { site, experience } from '../data/content.js'
 
 export default function About() {
+  const [imgLoaded, setImgLoaded] = useState(false)
   return (
     <section
       id="about"
@@ -37,10 +39,16 @@ export default function About() {
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-accent to-violet-500 p-0.5">
                     <div className="h-full w-full rounded-full bg-white dark:bg-ink-900" />
                   </div>
+                  {!imgLoaded && (
+                    <div className="absolute inset-0.5 rounded-full bg-ink-200 dark:bg-ink-700 animate-pulse" />
+                  )}
                   <img
                     src={site.photo}
                     alt={site.name}
-                    className="absolute inset-0.5 h-[calc(100%-4px)] w-[calc(100%-4px)] rounded-full object-cover object-top"
+                    loading="lazy"
+                    decoding="async"
+                    onLoad={() => setImgLoaded(true)}
+                    className={`absolute inset-0.5 h-[calc(100%-4px)] w-[calc(100%-4px)] rounded-full object-cover object-top transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
                   />
                 </div>
               </div>

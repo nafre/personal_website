@@ -75,6 +75,11 @@
 /* === COMPONENTS === .container-*, .section-eyebrow, .btn-*, .card, .chip, .hairline,
    .nav-link, .form-input, .icon-link, .timeline, .accent-underline, .grid-dotted */
 @layer components {
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+  }
+
   .container-narrow {
     @apply mx-auto w-full max-w-5xl px-5 sm:px-8;
   }
