@@ -269,7 +269,7 @@
       radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.06) 1px, transparent 0);
   }
 
-  /* Animated gradient text for hero accent word */
+  /* Static gradient text for hero accent word */
   .accent-underline {
     background-image: linear-gradient(
       90deg,
@@ -277,11 +277,9 @@
       rgba(var(--color-secondary-rgb), 0.9),
       rgba(var(--color-accent-rgb), 0.9)
     );
-    background-size: 200% 100%;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    animation: shimmer 6s linear infinite;
   }
 
   /* Nav link with animated gradient underline */
@@ -403,6 +401,7 @@
 .orb-a {
   background: rgba(var(--color-accent-rgb), 0.09);
   animation: orb-float-a 22s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .dark .orb-a {
@@ -412,6 +411,7 @@
 .orb-b {
   background: rgba(var(--color-secondary-rgb), 0.08);
   animation: orb-float-b 26s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .dark .orb-b {
@@ -421,6 +421,7 @@
 .orb-c {
   background: rgba(var(--color-accent-rgb), 0.05);
   animation: orb-float-c 32s ease-in-out infinite alternate;
+  will-change: transform;
 }
 
 .dark .orb-c {

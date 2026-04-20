@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import Reveal from './Reveal.jsx'
@@ -50,7 +51,7 @@ export default function Projects() {
   )
 }
 
-function ProjectCard({ project }) {
+const ProjectCard = memo(function ProjectCard({ project }) {
   return (
     <a
       href={project.link}
@@ -128,4 +129,4 @@ function ProjectCard({ project }) {
       </div>
     </a>
   )
-}
+})

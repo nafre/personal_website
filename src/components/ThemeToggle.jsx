@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import { Moon, Sun } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../hooks/useTheme.jsx'
 
-export default function ThemeToggle({ className = '' }) {
+export default memo(function ThemeToggle({ className = '' }) {
   const { theme, toggle } = useTheme()
   const isDark = theme === 'dark'
 
@@ -28,4 +29,4 @@ export default function ThemeToggle({ className = '' }) {
       </AnimatePresence>
     </button>
   )
-}
+})
