@@ -1,0 +1,45 @@
+---
+import { site } from '../data/content.js';
+---
+
+<section id="contact" aria-labelledby="contact-heading" class="relative py-24 sm:py-32">
+  <div class="container-narrow">
+    <p class="section-eyebrow" data-reveal>Contact</p>
+    <h2
+      id="contact-heading"
+      class="mt-4 font-display text-display-lg font-semibold tracking-tight text-balance"
+      data-reveal
+      data-reveal-delay="50"
+    >
+      Let's work together.
+    </h2>
+    <p class="mt-4 text-ink-600 dark:text-ink-300" data-reveal data-reveal-delay="100">
+      I read every message. Whether it's a contract, a role, or just to say hello — reach out via
+      LinkedIn or email.
+    </p>
+
+    <div class="mt-8 flex flex-wrap items-center gap-3" data-reveal data-reveal-delay="150">
+      <a href={site.socials.email} aria-label="Email" class="icon-link">
+        <!-- Mail icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
+      </a>
+      <a
+        href={site.socials.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="LinkedIn"
+        class="icon-link"
+      >
+        <!-- LinkedIn icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+          <rect width="4" height="12" x="2" y="9"></rect>
+          <circle cx="4" cy="4" r="2"></circle>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

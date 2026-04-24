@@ -1,0 +1,24 @@
+---
+import { site } from '../data/content.js';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="relative border-t border-ink-100 py-10 dark:border-ink-800">
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-ink-200/80 to-transparent dark:via-ink-700/60"
+  ></div>
+  <div class="container-wide flex flex-col items-center justify-between gap-4 text-sm text-ink-500 dark:text-ink-400 sm:flex-row">
+    <p>© {year} {site.name}. Built with care.</p>
+    <div class="flex items-center gap-5">
+      <a href={site.socials.github} target="_blank" rel="noopener noreferrer" class="link-subtle">
+        GitHub
+      </a>
+      <a href={site.socials.linkedin} target="_blank" rel="noopener noreferrer" class="link-subtle">
+        LinkedIn
+      </a>
+      <a href={site.socials.email} class="link-subtle">Email</a>
+    </div>
+  </div>
+</footer>
