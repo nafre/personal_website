@@ -1,5 +1,0 @@
-export { default as Nav }         from './Nav.jsx'
-export { default as NavIsland }   from './NavIsland.jsx'
-export { default as Hero }        from './Hero.jsx'
-export { default as Reveal }      from './Reveal.jsx'
-export { default as ThemeToggle } from './ThemeToggle.jsx'

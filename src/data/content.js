@@ -11,6 +11,7 @@
  * @property {string[]} longBio      - Array of paragraph strings rendered in the About section body
  * @property {string}   focus        - Short phrase for the About sidebar "Focus" row
  * @property {string}   availability - Availability badge string shown in Hero
+ * @property {string}   [photo]      - Path to avatar image; set to '' to hide
  * @property {{ github: string, linkedin: string, email: string }} socials - href-ready URLs (email should include mailto:)
  */
 
@@ -117,32 +118,61 @@ export const experience = [
 ]
 
 /**
+ * @typedef {Object} SkillItem
+ * @property {string} name  - Technology name displayed on the card
+ * @property {string} icon  - Iconify icon ID (e.g. 'simple-icons:react')
+ * @property {string} color - Brand hex colour for the icon and card tint
+ *
  * @typedef {Object} SkillGroup
- * @property {string}   group - Category label displayed as the card heading
- * @property {string[]} items - Skill names rendered as chip tags
+ * @property {string}      group - Category label displayed as the section header
+ * @property {SkillItem[]} items - Technologies rendered as icon cards
  */
 
 /** @type {SkillGroup[]} */
 export const skills = [
   {
     group: 'Languages',
-    items: ['Java', 'TypeScript', 'JavaScript', 'SQL'],
+    items: [
+      { name: 'Java',       icon: 'simple-icons:openjdk',    color: '#ED8B00' },
+      { name: 'TypeScript', icon: 'simple-icons:typescript', color: '#3178C6' },
+      { name: 'JavaScript', icon: 'simple-icons:javascript', color: '#F7DF1E' },
+      { name: 'SQL',        icon: 'simple-icons:postgresql', color: '#4169E1' },
+    ],
   },
   {
     group: 'Frontend',
-    items: ['React', 'Next.js', 'Tailwind', 'Vite'],
+    items: [
+      { name: 'React',    icon: 'simple-icons:react',       color: '#61DAFB' },
+      { name: 'Next.js',  icon: 'simple-icons:nextdotjs',   color: '#818cf8' },
+      { name: 'Tailwind', icon: 'simple-icons:tailwindcss', color: '#06B6D4' },
+      { name: 'Vite',     icon: 'simple-icons:vite',        color: '#646CFF' },
+    ],
   },
   {
     group: 'Backend & Infra',
-    items: ['Spring Boot', 'PostgreSQL', 'Kafka', 'Docker'],
+    items: [
+      { name: 'Spring Boot', icon: 'simple-icons:springboot',  color: '#6DB33F' },
+      { name: 'PostgreSQL',  icon: 'simple-icons:postgresql',  color: '#4169E1' },
+      { name: 'Kafka',       icon: 'simple-icons:apachekafka', color: '#818cf8' },
+      { name: 'Docker',      icon: 'simple-icons:docker',      color: '#2496ED' },
+    ],
   },
   {
     group: 'Craft',
-    items: ['System design', 'API design', 'Design systems', 'Mentoring'],
+    items: [
+      { name: 'System design',  icon: 'mdi:layers-triple',  color: '#818cf8' },
+      { name: 'API design',     icon: 'mdi:api',             color: '#818cf8' },
+      { name: 'Design systems', icon: 'mdi:palette-swatch',  color: '#818cf8' },
+      { name: 'Mentoring',      icon: 'mdi:account-group',   color: '#818cf8' },
+    ],
   },
   {
     group: 'A.I.',
-    items: ['Github Copilot', 'Claude Code', 'OpenAI Codex'],
+    items: [
+      { name: 'GitHub Copilot', icon: 'simple-icons:github',    color: '#818cf8' },
+      { name: 'Claude Code',    icon: 'simple-icons:anthropic', color: '#D97757' },
+      { name: 'OpenAI Codex',   icon: 'simple-icons:openai',    color: '#818cf8' },
+    ],
   },
 ]
 
@@ -168,10 +198,10 @@ export const stats = {
 
 /** @type {NavLink[]} */
 export const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#work', label: 'Work' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/#about', label: 'About' },
+  { href: '/#work', label: 'Work' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#contact', label: 'Contact' },
   { href: '/blog', label: 'Blog' },
 ]

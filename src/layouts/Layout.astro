@@ -1,48 +1,95 @@
 ---
-import NavIsland from '../components/NavIsland';
-import Footer from '../components/Footer.astro';
-import '../index.css';
+import Nav from '../components/Nav'
+import Footer from '../components/Footer.astro'
+import CodeSymbols from '../components/CodeSymbols'
+import '../styles/global.css'
 
 interface Props {
-  title?: string;
-  description?: string;
-  ogImage?: string;
+  title?: string
+  description?: string
+  ogImage?: string
+  canonical?: string
 }
 
 const {
   title = 'Mohamed Erfan — Backend Engineer | Fintech, Payments & Insurance Infrastructure',
   description = 'Mohamed Erfan is a backend engineer in Kuala Lumpur with 6+ years in fintech — building Mastercard\'s payment gateway and Guidewire\'s APAC insurance platform. Specialises in Java, Spring Boot, Kafka, and distributed systems at scale.',
   ogImage = 'https://erfan.dev/og.png',
-} = Astro.props;
+  canonical = 'https://erfan.dev/',
+} = Astro.props
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Mohamed Erfan',
+  jobTitle: 'Software Engineer',
+  email: 'mailto:erfansiraj97@gmail.com',
+  url: 'https://erfan.dev',
+  image: 'https://erfan.dev/images/avatar.jpg',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Kuala Lumpur',
+    addressCountry: 'MY',
+  },
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Endava',
+  },
+  alumniOf: {
+    '@type': 'EducationalOrganization',
+    name: 'Universiti Sains Malaysia',
+  },
+  sameAs: [
+    'https://github.com/nafre/',
+    'https://www.linkedin.com/in/mohderfan/',
+  ],
+}
 ---
 
 <!doctype html>
-<html lang="en" class="h-full">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#6366F1" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#0B0B0E" media="(prefers-color-scheme: dark)" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
 
+    <!-- Theme init: runs before paint to prevent FOUC -->
+    <script is:inline>
+      ;(function () {
+        const stored = localStorage.getItem('theme')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="author" content="Mohamed Erfan" />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
-    <link rel="canonical" href="https://erfan.dev/" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:locale" content="en_US" />
-    <meta property="og:url" content="https://erfan.dev/" />
-    <meta property="og:site_name" content="Mohamed Erfan" />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:alt" content="Mohamed Erfan — Backend Engineer portfolio" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -51,162 +98,19 @@ const {
     <meta name="twitter:image" content={ogImage} />
     <meta name="twitter:image:alt" content="Mohamed Erfan — Backend Engineer portfolio" />
 
-    <!-- Fonts: preconnect first, then load non-blocking via media trick -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
-    </noscript>
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!-- Prevent FOUC: applies dark/light mode and randomises colour palette before first paint -->
-    <script is:inline>
-      (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var theme = stored || (prefersDark ? 'dark' : 'light');
-          if (theme === 'dark') document.documentElement.classList.add('dark');
-
-          var palettes = [
-            {
-              name: 'electric-indigo',
-              accent: '#6366F1', accentSoft: '#818CF8', accentDeep: '#4F46E5',
-              accentRgb: '99, 102, 241', accentSoftRgb: '129, 140, 248',
-              secondary: '#8B5CF6', secondarySoft: '#A78BFA', secondaryDeep: '#7C3AED',
-              secondaryRgb: '139, 92, 246', secondarySoftRgb: '167, 139, 250',
-            },
-            {
-              name: 'ocean-blue',
-              accent: '#2563EB', accentSoft: '#60A5FA', accentDeep: '#1D4ED8',
-              accentRgb: '37, 99, 235', accentSoftRgb: '96, 165, 250',
-              secondary: '#38BDF8', secondarySoft: '#7DD3FC', secondaryDeep: '#0284C7',
-              secondaryRgb: '56, 189, 248', secondarySoftRgb: '125, 211, 252',
-            },
-            {
-              name: 'emerald-coast',
-              accent: '#10B981', accentSoft: '#34D399', accentDeep: '#059669',
-              accentRgb: '16, 185, 129', accentSoftRgb: '52, 211, 153',
-              secondary: '#14B8A6', secondarySoft: '#2DD4BF', secondaryDeep: '#0D9488',
-              secondaryRgb: '20, 184, 166', secondarySoftRgb: '45, 212, 191',
-            },
-            {
-              name: 'royal-violet',
-              accent: '#7C3AED', accentSoft: '#8B5CF6', accentDeep: '#6D28D9',
-              accentRgb: '124, 58, 237', accentSoftRgb: '139, 92, 246',
-              secondary: '#A855F7', secondarySoft: '#C084FC', secondaryDeep: '#9333EA',
-              secondaryRgb: '168, 85, 247', secondarySoftRgb: '192, 132, 252',
-            },
-            {
-              name: 'amber-gold',
-              accent: '#D97706', accentSoft: '#F59E0B', accentDeep: '#B45309',
-              accentRgb: '217, 119, 6', accentSoftRgb: '245, 158, 11',
-              secondary: '#EAB308', secondarySoft: '#FACC15', secondaryDeep: '#CA8A04',
-              secondaryRgb: '234, 179, 8', secondarySoftRgb: '250, 204, 21',
-            },
-            {
-              name: 'cobalt-sky',
-              accent: '#3B82F6', accentSoft: '#60A5FA', accentDeep: '#2563EB',
-              accentRgb: '59, 130, 246', accentSoftRgb: '96, 165, 250',
-              secondary: '#818CF8', secondarySoft: '#A5B4FC', secondaryDeep: '#6366F1',
-              secondaryRgb: '129, 140, 248', secondarySoftRgb: '165, 180, 252',
-            },
-          ];
-
-          var p = palettes[Math.floor(Math.random() * palettes.length)];
-          var r = document.documentElement;
-          r.style.setProperty('--color-accent', p.accent);
-          r.style.setProperty('--color-accent-soft', p.accentSoft);
-          r.style.setProperty('--color-accent-deep', p.accentDeep);
-          r.style.setProperty('--color-accent-rgb', p.accentRgb);
-          r.style.setProperty('--color-accent-soft-rgb', p.accentSoftRgb);
-          r.style.setProperty('--color-secondary', p.secondary);
-          r.style.setProperty('--color-secondary-soft', p.secondarySoft);
-          r.style.setProperty('--color-secondary-deep', p.secondaryDeep);
-          r.style.setProperty('--color-secondary-rgb', p.secondaryRgb);
-          r.style.setProperty('--color-secondary-soft-rgb', p.secondarySoftRgb);
-          try { sessionStorage.setItem('colorTheme', p.name); } catch (_) {}
-        } catch (e) {}
-      })();
-    </script>
-
-    <!-- JSON-LD: Person schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "Mohamed Erfan",
-        "givenName": "Erfan",
-        "jobTitle": "Software Engineer",
-        "description": "Backend engineer in Kuala Lumpur with 6+ years in fintech — building Mastercard's payment gateway and Guidewire's APAC insurance platform. Specialises in Java, Spring Boot, Kafka, and distributed systems at scale.",
-        "url": "https://erfan.dev",
-        "email": "mailto:erfansiraj97@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Kuala Lumpur",
-          "addressCountry": "MY"
-        },
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Endava"
-        },
-        "alumniOf": {
-          "@type": "EducationalOrganization",
-          "name": "Universiti Sains Malaysia"
-        },
-        "knowsAbout": [
-          "Java", "Spring Boot", "TypeScript", "JavaScript", "React",
-          "PostgreSQL", "Apache Kafka", "Docker", "System Design", "API Design",
-          "Distributed Systems", "CI/CD", "Software Architecture"
-        ],
-        "sameAs": [
-          "https://github.com/",
-          "https://www.linkedin.com/"
-        ]
-      }
-    </script>
+    <!-- JSON-LD -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body class="antialiased bg-white text-ink-900 dark:bg-ink-900 dark:text-ink-100">
-    <a
-      href="#main"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-ink-900 focus:text-white focus:px-3 focus:py-2"
-    >
-      Skip to content
-    </a>
-    <NavIsland client:load />
-    <slot />
-    <Footer />
 
-    <!-- Scroll-reveal: fade-up elements with data-reveal when they enter the viewport -->
-    <script>
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const el = entry.target as HTMLElement;
-              const delay = el.dataset.revealDelay;
-              if (delay) el.style.transitionDelay = delay + 'ms';
-              el.classList.add('revealed');
-              observer.unobserve(el);
-            }
-          });
-        },
-        { threshold: 0.15 },
-      );
-      document.querySelectorAll('[data-reveal]').forEach((el) => observer.observe(el));
-    </script>
+  <body>
+    <CodeSymbols client:only="react" />
+    <Nav client:load />
+    <main>
+      <slot />
+    </main>
+    <Footer />
   </body>
 </html>

@@ -1,53 +1,57 @@
 ---
-import Layout from './Layout.astro';
+import Layout from './Layout.astro'
+import { Icon } from 'astro-icon/components'
 
 interface Props {
-  title: string;
-  description: string;
-  date: Date;
-  tags?: string[];
+  title: string
+  description: string
+  date: Date
+  tags: string[]
 }
 
-const { title, description, date, tags = [] } = Astro.props;
+const { title, description, date, tags } = Astro.props
 
-const formattedDate = date.toLocaleDateString('en-US', {
+const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
   month: 'long',
   day: 'numeric',
-});
+}).format(date)
 ---
 
 <Layout title={`${title} — Mohamed Erfan`} description={description}>
-  <main id="main" class="relative pt-32 pb-24">
-    <div class="container-narrow">
-      <a
-        href="/blog"
-        class="inline-flex items-center gap-1.5 text-sm text-ink-500 dark:text-ink-400 hover:text-accent transition-colors duration-200 mb-10"
-      >
-        ← Back to blog
-      </a>
+  <div class="mx-auto max-w-2xl px-6 py-24">
+    <a
+      href="/blog"
+      class="inline-flex items-center gap-2 text-sm text-[--color-muted] hover:text-[--color-accent] transition-colors mb-12 group"
+    >
+      <Icon
+        name="mdi:arrow-left"
+        class="w-4 h-4 transition-transform group-hover:-translate-x-1"
+      />
+      Back to blog
+    </a>
 
+    <article>
       <header class="mb-12">
-        <p class="section-eyebrow mb-4">Blog</p>
-        <h1 class="font-display text-display-lg font-semibold tracking-tight text-balance mb-4">
+        <div class="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag) => (
+            <span class="chip">{tag}</span>
+          ))}
+        </div>
+        <h1
+          class="text-3xl font-bold tracking-tight mb-4"
+          style="color: var(--color-text);"
+        >
           {title}
         </h1>
-        <p class="text-ink-600 dark:text-ink-300 text-lg mb-6">{description}</p>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-ink-500 dark:text-ink-400">
-          <time datetime={date.toISOString()}>{formattedDate}</time>
-          {tags.length > 0 && (
-            <ul class="flex flex-wrap gap-2">
-              {tags.map((tag) => (
-                <li class="chip">{tag}</li>
-              ))}
-            </ul>
-          )}
-        </div>
+        <p class="text-sm" style="color: var(--color-muted);">
+          {formattedDate}
+        </p>
       </header>
 
-      <div class="prose dark:prose-invert max-w-none">
+      <div class="prose prose-lg">
         <slot />
       </div>
-    </div>
-  </main>
+    </article>
+  </div>
 </Layout>

@@ -1,8 +1,13 @@
-import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
-import mdx from '@astrojs/mdx';
+import { defineConfig } from 'astro/config'
+import react from '@astrojs/react'
+import mdx from '@astrojs/mdx'
+import icon from 'astro-icon'
 
 export default defineConfig({
-  integrations: [react(), tailwind({ applyBaseStyles: false }), mdx()],
-});
+  site: 'https://erfan.dev',
+  integrations: [
+    react(),
+    mdx(),
+    icon({ include: { mdi: ['*'] } }),
+  ],
+})

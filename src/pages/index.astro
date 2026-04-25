@@ -1,25 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero';
-import About from '../components/About.astro';
-import Projects from '../components/Projects.astro';
-import Experience from '../components/Experience.astro';
-import Skills from '../components/Skills.astro';
-import Contact from '../components/Contact.astro';
+import Layout from '../layouts/Layout.astro'
+import Hero from '../components/Hero'
+import About from '../components/About'
+import Projects from '../components/Projects'
+import Experience from '../components/Experience'
+import Skills from '../components/Skills'
+import Contact from '../components/Contact'
 ---
 
 <Layout>
-  <main id="main" class="relative">
-    <Hero client:load />
-    <div class="hairline" aria-hidden="true"></div>
-    <About />
-    <div class="hairline" aria-hidden="true"></div>
-    <Projects />
-    <div class="hairline" aria-hidden="true"></div>
-    <Experience />
-    <div class="hairline" aria-hidden="true"></div>
-    <Skills />
-    <div class="hairline" aria-hidden="true"></div>
-    <Contact />
-  </main>
+  <Hero client:load />
+  <About client:visible />
+  <Projects client:visible />
+  <Experience client:visible />
+  <Skills client:only="react" />
+  <Contact client:visible />
 </Layout>

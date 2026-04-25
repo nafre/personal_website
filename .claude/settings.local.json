@@ -1,8 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "mcp__Claude_Preview__preview_start",
-      "Bash(npm run *)"
+      "Bash(npm install *)",
+      "WebFetch(domain:careerportofio.netlify.app)"
     ]
   }
 }

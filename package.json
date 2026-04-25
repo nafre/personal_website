@@ -1,32 +1,35 @@
 {
   "name": "erfan-portfolio",
-  "private": true,
-  "version": "1.0.0",
   "type": "module",
-  "description": "Erfan's personal portfolio — minimalist, premium, built with Astro + React + Tailwind + Framer Motion.",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "lint": "eslint src"
+    "check": "astro check"
   },
   "dependencies": {
-    "framer-motion": "^11.3.19",
-    "lucide-react": "^0.454.0",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/mdx": "latest",
+    "@astrojs/react": "latest",
+    "@iconify-json/mdi": "latest",
+    "@iconify-json/simple-icons": "^1.2.79",
+    "@iconify/react": "^6.0.2",
+    "@tailwindcss/postcss": "^4.2.4",
+    "@tailwindcss/vite": "latest",
+    "astro": "latest",
+    "astro-icon": "latest",
+    "framer-motion": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwindcss": "latest"
   },
   "devDependencies": {
-    "@astrojs/mdx": "^4.0.0",
-    "@astrojs/react": "^4.0.0",
-    "@astrojs/tailwind": "^6.0.0",
-    "@eslint/js": "^10.0.1",
-    "@tailwindcss/typography": "^0.5.15",
-    "astro": "^5.0.0",
-    "eslint": "^10.2.1",
-    "eslint-plugin-react-hooks": "^7.1.1",
-    "eslint-plugin-react-refresh": "^0.5.2",
-    "globals": "^17.5.0",
-    "tailwindcss": "^3.4.13"
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "typescript": "latest"
+  },
+  "overrides": {
+    "vite": "^7"
   }
 }
