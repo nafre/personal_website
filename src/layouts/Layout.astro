@@ -1,7 +1,6 @@
 ---
 import Nav from '../components/Nav'
 import Footer from '../components/Footer.astro'
-import CodeSymbols from '../components/CodeSymbols'
 import '../styles/global.css'
 
 interface Props {
@@ -70,11 +69,11 @@ const jsonLd = {
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
     />
 
     <!-- SEO -->
@@ -106,7 +105,6 @@ const jsonLd = {
   </head>
 
   <body>
-    <CodeSymbols client:only="react" />
     <Nav client:load />
     <main>
       <slot />

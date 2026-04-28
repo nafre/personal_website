@@ -125,7 +125,7 @@ export default function Nav() {
               lineHeight: 1.2,
             }}
           >
-            <span style={{ fontSize: '0.9375rem', fontWeight: 600, color: 'var(--color-text)' }}>
+            <span style={{ fontSize: '0.9375rem', fontFamily: 'var(--font-display)', fontWeight: 600, color: 'var(--color-text)' }}>
               Mohamed Erfan
             </span>
             <span style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 500 }}>

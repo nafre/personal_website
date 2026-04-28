@@ -79,12 +79,12 @@ export const heroStagger: Variants = {
 
 export const cardHover = {
   y: -6,
-  transition: { duration: 0.25, ease: easing },
+  transition: { type: 'spring' as const, stiffness: 400, damping: 30 },
 }
 
 export const iconHover = {
   scale: 1.1,
-  transition: { duration: 0.15, ease: easing },
+  transition: { type: 'spring' as const, stiffness: 500, damping: 25 },
 }
 
 export const dotReveal: Variants = {

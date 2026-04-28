@@ -32,6 +32,7 @@ export default function Experience() {
             <h2
               style={{
                 fontSize: 'clamp(1.75rem, 3vw, 2rem)',
+                fontFamily: 'var(--font-display)',
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
                 color: 'var(--color-text)',
@@ -43,7 +44,7 @@ export default function Experience() {
 
           {/* Wrapper holds the animated line + list as siblings */}
           <div style={{ position: 'relative', maxWidth: '48rem' }}>
-            {/* Vertical line — draws in top→bottom */}
+            {/* Vertical line — gradient from accent at top to border at bottom */}
             <m.div
               aria-hidden="true"
               variants={lineVariants}
@@ -55,10 +56,11 @@ export default function Experience() {
                 left: '0.6875rem',
                 top: '1.5rem',
                 bottom: '1.5rem',
-                width: '1px',
-                backgroundColor: 'var(--color-border)',
+                width: '2px',
+                background: 'linear-gradient(to bottom, var(--color-accent), var(--color-border))',
                 transformOrigin: 'top',
                 pointerEvents: 'none',
+                borderRadius: '999px',
               }}
             />
 
@@ -67,121 +69,138 @@ export default function Experience() {
               initial="hidden"
               whileInView="show"
               viewport={{ once: true, amount: 0.1 }}
-              style={{
-                listStyle: 'none',
-                margin: 0,
-                padding: 0,
-              }}
+              style={{ listStyle: 'none', margin: 0, padding: 0 }}
             >
-              {experience.map((item, index) => (
-                <m.li
-                  key={`${item.company}-${index}`}
-                  variants={itemVariants}
-                  style={{
-                    position: 'relative',
-                    paddingLeft: '2.5rem',
-                    paddingBottom: index < experience.length - 1 ? '2rem' : 0,
-                  }}
-                >
-                  {/* Timeline dot — scales in via dotReveal variant */}
-                  <m.span
-                    aria-hidden="true"
-                    variants={dotVariants}
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      top: '1.125rem',
-                      width: '1.375rem',
-                      height: '1.375rem',
-                      borderRadius: '50%',
-                      backgroundColor: 'var(--color-surface)',
-                      border: '2px solid var(--color-accent)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      boxSizing: 'border-box',
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: '6px',
-                        height: '6px',
-                        borderRadius: '50%',
-                        backgroundColor: 'var(--color-accent)',
-                        display: 'block',
-                      }}
-                    />
-                  </m.span>
+              {experience.map((item, index) => {
+                const isCurrent = item.period.includes('Present')
 
-                  {/* Content card */}
-                  <div
+                return (
+                  <m.li
+                    key={`${item.company}-${index}`}
+                    variants={itemVariants}
                     style={{
-                      backgroundColor: 'var(--color-surface)',
-                      border: '1px solid var(--color-border)',
-                      borderRadius: 'var(--radius-xl)',
-                      padding: '1.25rem 1.5rem',
-                      boxShadow: 'var(--shadow-sm)',
+                      position: 'relative',
+                      paddingLeft: '2.75rem',
+                      paddingBottom: index < experience.length - 1 ? '2rem' : 0,
                     }}
                   >
-                    <div
+                    {/* Timeline dot */}
+                    <m.span
+                      aria-hidden="true"
+                      variants={dotVariants}
                       style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: '1.25rem',
+                        width: '1.375rem',
+                        height: '1.375rem',
+                        borderRadius: '50%',
+                        backgroundColor: isCurrent ? 'var(--color-accent)' : 'var(--color-surface)',
+                        border: '2px solid var(--color-accent)',
                         display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-start',
-                        gap: '0.75rem',
-                        flexWrap: 'wrap',
-                        marginBottom: '0.5rem',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        boxSizing: 'border-box',
+                        animation: (isCurrent && !prefersReduced) ? 'dot-glow-pulse 2.5s ease-in-out infinite' : undefined,
                       }}
                     >
-                      <div>
-                        <p
+                      {!isCurrent && (
+                        <span
                           style={{
-                            fontSize: '1rem',
-                            fontWeight: 600,
-                            color: 'var(--color-text)',
-                            letterSpacing: '-0.01em',
+                            width: '6px',
+                            height: '6px',
+                            borderRadius: '50%',
+                            backgroundColor: 'var(--color-accent)',
+                            display: 'block',
+                            opacity: 0.7,
                           }}
-                        >
-                          {item.company}
-                        </p>
-                        <p
-                          style={{
-                            fontSize: '0.8125rem',
-                            color: 'var(--color-accent)',
-                            fontWeight: 500,
-                            marginTop: '0.125rem',
-                          }}
-                        >
-                          {item.role}
-                        </p>
-                      </div>
-                      <span
+                        />
+                      )}
+                    </m.span>
+
+                    {/* Content card */}
+                    <m.div
+                      whileHover={prefersReduced ? {} : { y: -4, transition: { type: 'spring', stiffness: 400, damping: 30 } }}
+                      style={{
+                        backgroundColor: 'var(--color-surface)',
+                        border: '1px solid var(--color-border)',
+                        borderLeft: `3px solid ${isCurrent ? 'var(--color-accent)' : 'color-mix(in srgb, var(--color-accent) 35%, var(--color-border))'}`,
+                        borderRadius: 'var(--radius-xl)',
+                        padding: '1.25rem 1.5rem',
+                        boxShadow: isCurrent ? 'var(--shadow-md)' : 'var(--shadow-sm)',
+                        transition: 'box-shadow 0.25s ease',
+                      }}
+                    >
+                      <div
                         style={{
-                          fontSize: '0.75rem',
-                          color: 'var(--color-subtle)',
-                          fontWeight: 500,
-                          backgroundColor: 'var(--color-bg-muted)',
-                          border: '1px solid var(--color-border)',
-                          borderRadius: '999px',
-                          padding: '0.2rem 0.625rem',
-                          whiteSpace: 'nowrap',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'flex-start',
+                          gap: '0.75rem',
+                          flexWrap: 'wrap',
+                          marginBottom: '0.5rem',
                         }}
                       >
-                        {item.period}
-                      </span>
-                    </div>
-                    <p
-                      style={{
-                        fontSize: '0.875rem',
-                        color: 'var(--color-muted)',
-                        lineHeight: 1.7,
-                      }}
-                    >
-                      {item.summary}
-                    </p>
-                  </div>
-                </m.li>
-              ))}
+                        <div>
+                          <p
+                            style={{
+                              fontSize: '1.0625rem',
+                              fontFamily: 'var(--font-display)',
+                              fontWeight: 600,
+                              color: 'var(--color-text)',
+                              letterSpacing: '-0.02em',
+                            }}
+                          >
+                            {item.company}
+                          </p>
+                          <p
+                            style={{
+                              fontSize: '0.8125rem',
+                              color: 'var(--color-muted)',
+                              fontWeight: 500,
+                              marginTop: '0.2rem',
+                            }}
+                          >
+                            {item.role}
+                          </p>
+                        </div>
+
+                        {/* Period badge — amber tint for current role */}
+                        <span
+                          style={{
+                            fontSize: '0.75rem',
+                            fontWeight: 500,
+                            whiteSpace: 'nowrap',
+                            borderRadius: '999px',
+                            padding: '0.2rem 0.7rem',
+                            ...(isCurrent ? {
+                              color: 'var(--color-accent)',
+                              backgroundColor: 'color-mix(in srgb, var(--color-accent) 12%, transparent)',
+                              border: '1px solid color-mix(in srgb, var(--color-accent) 30%, transparent)',
+                            } : {
+                              color: 'var(--color-subtle)',
+                              backgroundColor: 'var(--color-bg-muted)',
+                              border: '1px solid var(--color-border)',
+                            }),
+                          }}
+                        >
+                          {item.period}
+                        </span>
+                      </div>
+
+                      <p
+                        style={{
+                          fontSize: '0.875rem',
+                          color: 'var(--color-muted)',
+                          lineHeight: 1.7,
+                        }}
+                      >
+                        {item.summary}
+                      </p>
+                    </m.div>
+                  </m.li>
+                )
+              })}
             </m.ol>
           </div>
         </div>

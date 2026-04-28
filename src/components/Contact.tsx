@@ -1,13 +1,7 @@
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
+import { useState, useRef } from 'react'
+import { LazyMotion, domAnimation, m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { site } from '../data/content.js'
-import { fadeUp, stagger, iconHover } from '../lib/motion'
-
-const EmailIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2"/>
-    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-  </svg>
-)
+import { fadeUp, stagger } from '../lib/motion'
 
 const GitHubIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -21,11 +15,98 @@ const LinkedInIcon = () => (
   </svg>
 )
 
+type FormState = 'idle' | 'submitting' | 'success' | 'error'
+
+const inputStyle = (hasError: boolean): React.CSSProperties => ({
+  width: '100%',
+  padding: '0.75rem 1rem',
+  fontSize: '0.9375rem',
+  color: 'var(--color-text)',
+  backgroundColor: 'var(--color-surface)',
+  border: `1px solid ${hasError ? 'var(--color-error)' : 'var(--color-border)'}`,
+  borderRadius: 'var(--radius-md)',
+  outline: 'none',
+  transition: 'border-color 0.2s',
+  fontFamily: 'inherit',
+})
+
+const labelStyle: React.CSSProperties = {
+  display: 'block',
+  fontSize: '0.875rem',
+  fontWeight: 500,
+  color: 'var(--color-text)',
+  marginBottom: '0.375rem',
+}
+
+const fieldErrorStyle: React.CSSProperties = {
+  fontSize: '0.8125rem',
+  color: 'var(--color-error)',
+  marginTop: '0.25rem',
+}
+
 export default function Contact() {
   const prefersReduced = useReducedMotion()
 
   const containerVariants = prefersReduced ? { hidden: {}, show: {} } : stagger(0.1)
   const itemVariants = prefersReduced ? { hidden: { opacity: 0 }, show: { opacity: 1 } } : fadeUp
+
+  const [formState, setFormState] = useState<FormState>('idle')
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({})
+  const [serverError, setServerError] = useState('')
+
+  const nameRef    = useRef<HTMLInputElement>(null)
+  const emailRef   = useRef<HTMLInputElement>(null)
+  const messageRef = useRef<HTMLTextAreaElement>(null)
+  const honeypotRef = useRef<HTMLInputElement>(null)
+
+  async function handleSubmit(e: { preventDefault(): void }) {
+    e.preventDefault()
+    setFieldErrors({})
+    setServerError('')
+    setFormState('submitting')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:    nameRef.current?.value ?? '',
+          email:   emailRef.current?.value ?? '',
+          message: messageRef.current?.value ?? '',
+          website: honeypotRef.current?.value ?? '',
+        }),
+      })
+
+      if (res.status === 201) {
+        setFormState('success')
+        if (nameRef.current)    nameRef.current.value = ''
+        if (emailRef.current)   emailRef.current.value = ''
+        if (messageRef.current) messageRef.current.value = ''
+        return
+      }
+
+      if (res.status === 422) {
+        const data = await res.json()
+        setFieldErrors(data.errors ?? {})
+        setFormState('idle')
+        return
+      }
+
+      if (res.status === 429) {
+        setServerError('Too many requests. Please wait 15 minutes before trying again.')
+        setFormState('error')
+        return
+      }
+
+      setServerError('Something went wrong. Please try again or email me directly.')
+      setFormState('error')
+    } catch {
+      setServerError('Network error. Please check your connection and try again.')
+      setFormState('error')
+    }
+  }
+
+  const isSubmitting = formState === 'submitting'
 
   return (
     <LazyMotion features={domAnimation} strict>
@@ -45,78 +126,282 @@ export default function Contact() {
             style={{
               maxWidth: '40rem',
               margin: '0 auto',
-              textAlign: 'center',
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
               gap: '1.25rem',
             }}
           >
-            <m.span variants={itemVariants} className="section-label">
-              Contact
-            </m.span>
+            {/* Header */}
+            <div style={{ textAlign: 'center' }}>
+              <m.span variants={itemVariants} className="section-label">
+                Contact
+              </m.span>
 
-            <m.h2
-              variants={itemVariants}
-              style={{
-                fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
-                fontWeight: 700,
-                letterSpacing: '-0.02em',
-                color: 'var(--color-text)',
-                lineHeight: 1.2,
-              }}
-            >
-              Let&apos;s work together.
-            </m.h2>
+              <m.h2
+                variants={itemVariants}
+                style={{
+                  fontSize: 'clamp(1.75rem, 4vw, 2.5rem)',
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
+                  letterSpacing: '-0.02em',
+                  color: 'var(--color-text)',
+                  lineHeight: 1.2,
+                  marginTop: '0.25rem',
+                }}
+              >
+                Let&apos;s work together.
+              </m.h2>
 
-            <m.p
-              variants={itemVariants}
-              style={{
-                fontSize: '1rem',
-                color: 'var(--color-muted)',
-                lineHeight: 1.75,
-                maxWidth: '32rem',
-              }}
-            >
-              I&apos;m open to backend, fintech, and payments opportunities. If you&apos;re building
-              something where reliability matters, let&apos;s talk.
-            </m.p>
+              <m.p
+                variants={itemVariants}
+                style={{
+                  fontSize: '1rem',
+                  color: 'var(--color-muted)',
+                  lineHeight: 1.75,
+                  marginTop: '0.75rem',
+                }}
+              >
+                I&apos;m open to backend, fintech, and payments opportunities. If you&apos;re building
+                something where reliability matters, let&apos;s talk.
+              </m.p>
+            </div>
 
-            <m.a
+            {/* Form */}
+            <m.form
               variants={itemVariants}
-              href={site.socials.email}
+              onSubmit={handleSubmit}
+              noValidate
               style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '0.5rem',
-                fontSize: '0.9375rem',
-                fontWeight: 600,
-                color: 'var(--color-bg)',
-                backgroundColor: 'var(--color-accent)',
-                borderRadius: 'var(--radius-md)',
-                padding: '0.75rem 1.75rem',
-                textDecoration: 'none',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '1rem',
                 marginTop: '0.5rem',
-                transition: 'opacity 0.2s',
               }}
-              whileHover={prefersReduced ? {} : { scale: 1.03 }}
-              whileTap={prefersReduced ? {} : { scale: 0.98 }}
             >
-              <EmailIcon />
-              {site.email}
-            </m.a>
+              {/* Honeypot — invisible to humans, filled by bots */}
+              <input
+                ref={honeypotRef}
+                type="text"
+                name="website"
+                tabIndex={-1}
+                aria-hidden="true"
+                autoComplete="off"
+                style={{
+                  position: 'absolute',
+                  left: '-9999px',
+                  opacity: 0,
+                  pointerEvents: 'none',
+                }}
+              />
 
+              {/* Name */}
+              <div>
+                <label htmlFor="contact-name" style={labelStyle}>Name</label>
+                <input
+                  ref={nameRef}
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  autoComplete="name"
+                  maxLength={100}
+                  required
+                  disabled={isSubmitting}
+                  aria-describedby={fieldErrors.name ? 'contact-name-error' : undefined}
+                  aria-invalid={!!fieldErrors.name}
+                  style={inputStyle(!!fieldErrors.name)}
+                />
+                {fieldErrors.name && (
+                  <span id="contact-name-error" role="alert" style={fieldErrorStyle}>
+                    {fieldErrors.name[0]}
+                  </span>
+                )}
+              </div>
+
+              {/* Email */}
+              <div>
+                <label htmlFor="contact-email" style={labelStyle}>Email</label>
+                <input
+                  ref={emailRef}
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  autoComplete="email"
+                  maxLength={254}
+                  required
+                  disabled={isSubmitting}
+                  aria-describedby={fieldErrors.email ? 'contact-email-error' : undefined}
+                  aria-invalid={!!fieldErrors.email}
+                  style={inputStyle(!!fieldErrors.email)}
+                />
+                {fieldErrors.email && (
+                  <span id="contact-email-error" role="alert" style={fieldErrorStyle}>
+                    {fieldErrors.email[0]}
+                  </span>
+                )}
+              </div>
+
+              {/* Message */}
+              <div>
+                <label htmlFor="contact-message" style={labelStyle}>Message</label>
+                <textarea
+                  ref={messageRef}
+                  id="contact-message"
+                  name="message"
+                  rows={5}
+                  maxLength={5000}
+                  required
+                  disabled={isSubmitting}
+                  aria-describedby={fieldErrors.message ? 'contact-message-error' : undefined}
+                  aria-invalid={!!fieldErrors.message}
+                  style={{
+                    ...inputStyle(!!fieldErrors.message),
+                    resize: 'vertical',
+                    minHeight: '7.5rem',
+                  }}
+                />
+                {fieldErrors.message && (
+                  <span id="contact-message-error" role="alert" style={fieldErrorStyle}>
+                    {fieldErrors.message[0]}
+                  </span>
+                )}
+              </div>
+
+              {/* Server-level error with email fallback */}
+              <AnimatePresence>
+                {formState === 'error' && serverError && (
+                  <m.p
+                    key="server-error"
+                    variants={itemVariants}
+                    initial="hidden"
+                    animate="show"
+                    exit="hidden"
+                    role="alert"
+                    aria-live="polite"
+                    style={{
+                      fontSize: '0.875rem',
+                      color: 'var(--color-error)',
+                      padding: '0.75rem 1rem',
+                      borderRadius: 'var(--radius-md)',
+                      border: '1px solid var(--color-error)',
+                      backgroundColor: 'color-mix(in srgb, var(--color-error) 8%, transparent)',
+                    }}
+                  >
+                    {serverError}{' '}
+                    <a
+                      href={site.socials.email}
+                      style={{
+                        color: 'inherit',
+                        fontWeight: 600,
+                        textUnderlineOffset: '3px',
+                      }}
+                    >
+                      Email me at {site.email} instead.
+                    </a>
+                  </m.p>
+                )}
+              </AnimatePresence>
+
+              {/* Submit button + email fallback */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                <m.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  aria-busy={isSubmitting}
+                  whileHover={prefersReduced || isSubmitting ? {} : { scale: 1.03 }}
+                  whileTap={prefersReduced || isSubmitting ? {} : { scale: 0.98 }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    fontSize: '0.9375rem',
+                    fontWeight: 600,
+                    color: 'var(--color-bg)',
+                    backgroundColor: 'var(--color-accent)',
+                    borderRadius: 'var(--radius-md)',
+                    padding: '0.75rem 1.75rem',
+                    border: 'none',
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                    opacity: isSubmitting ? 0.65 : 1,
+                    transition: 'opacity 0.2s',
+                  }}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        style={{ animation: 'spin 0.8s linear infinite' }}
+                      >
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+                      </svg>
+                      Sending…
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
+                </m.button>
+
+                <a
+                  href={site.socials.email}
+                  style={{
+                    fontSize: '0.875rem',
+                    color: 'var(--color-muted)',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s',
+                  }}
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-accent)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-muted)')}
+                >
+                  or email me directly
+                </a>
+              </div>
+            </m.form>
+
+            {/* Success state */}
+            <AnimatePresence>
+              {formState === 'success' && (
+                <m.div
+                  key="success"
+                  variants={itemVariants}
+                  initial="hidden"
+                  animate="show"
+                  exit="hidden"
+                  role="status"
+                  aria-live="polite"
+                  style={{
+                    fontSize: '0.9375rem',
+                    color: 'var(--color-success)',
+                    padding: '0.875rem 1rem',
+                    borderRadius: 'var(--radius-md)',
+                    border: '1px solid var(--color-success)',
+                    backgroundColor: 'color-mix(in srgb, var(--color-success) 8%, transparent)',
+                    fontWeight: 500,
+                  }}
+                >
+                  Message sent! I&apos;ll get back to you soon.
+                </m.div>
+              )}
+            </AnimatePresence>
+
+            {/* Social links */}
             <m.div
               variants={itemVariants}
               style={{
                 display: 'flex',
                 gap: '0.75rem',
+                justifyContent: 'center',
                 marginTop: '0.25rem',
               }}
             >
               {[
-                { href: site.socials.github, label: 'GitHub', icon: <GitHubIcon /> },
-                { href: site.socials.linkedin, label: 'LinkedIn', icon: <LinkedInIcon /> },
+                { href: site.socials.github,   label: 'GitHub',   icon: <GitHubIcon /> },
+                { href: site.socials.linkedin,  label: 'LinkedIn', icon: <LinkedInIcon /> },
               ].map(({ href, label, icon }) => (
                 <m.a
                   key={href}
@@ -124,7 +409,6 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  whileHover={prefersReduced ? {} : iconHover}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -156,6 +440,9 @@ export default function Contact() {
           </m.div>
         </div>
       </section>
+
+      {/* Spinner keyframe — scoped to this component's mount point */}
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </LazyMotion>
   )
 }

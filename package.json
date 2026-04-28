@@ -12,9 +12,11 @@
     "@astrojs/check": "^0.9.8",
     "@astrojs/mdx": "latest",
     "@astrojs/react": "latest",
+    "@astrojs/vercel": "^10.0.5",
     "@iconify-json/mdi": "latest",
     "@iconify-json/simple-icons": "^1.2.79",
     "@iconify/react": "^6.0.2",
+    "@supabase/supabase-js": "^2.104.1",
     "@tailwindcss/postcss": "^4.2.4",
     "@tailwindcss/vite": "latest",
     "astro": "latest",
@@ -22,7 +24,8 @@
     "framer-motion": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "tailwindcss": "latest"
+    "tailwindcss": "latest",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/react": "latest",

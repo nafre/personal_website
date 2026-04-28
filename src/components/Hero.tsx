@@ -130,13 +130,12 @@ function TerminalCard() {
         </span>
       </div>
       <div style={{ padding: '1.25rem 1.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', lineHeight: 1.9 }}>
-        <CodeLine comment="// backend engineer · KL" />
+        <CodeLine comment="// full-stack engineer · KL" />
         <CodeLine keyword="const" name=" config" op=" = {" />
         <CodeProp k="name"       v={'"Mohamed Erfan"'}         type="str" />
         <CodeProp k="role"       v={'"Software Engineer"'}     type="str" />
         <CodeProp k="company"    v={'"Endava · Mastercard"'}   type="str" />
-        <CodeProp k="stack"      v={'["Java", "Spring Boot", "Kafka"]'} type="arr" />
-        <CodeProp k="focus"      v={'"Payment Infrastructure"'} type="str" />
+        <CodeProp k="stack"      v={'["Java", "Spring Boot", "React"]'} type="arr" />
         <CodeProp k="experience" v={'"6+ years"'}              type="str" />
         <CodeProp k="available"  v="true"                      type="bool" />
         <CodeLine op="}" />
@@ -146,7 +145,7 @@ function TerminalCard() {
 }
 
 /* ─── Component ─────────────────────────────────────────────── */
-const SPECIALTIES = ['Fintech & Payments', 'System Architecture', 'API Design', 'Backend Infrastructure']
+const SPECIALTIES = ['Fintech & Payments', 'System Architecture', 'API Design', 'Backend Infrastructure', 'A.I. Overseer']
 
 export default function Hero() {
   const prefersReduced = useReducedMotion()
@@ -172,7 +171,7 @@ export default function Hero() {
     ? itemVariants
     : {
         hidden: { opacity: 0, x: 30 },
-        show:   { opacity: 1, x: 0, transition: { duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] } },
+        show:   { opacity: 1, x: 0, transition: { duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] } },
       }
 
   return (
@@ -192,43 +191,19 @@ export default function Hero() {
         {/* Dot grid texture */}
         {!prefersReduced && <div aria-hidden="true" className="hero-dot-grid" />}
 
-        {/* Ambient gradient blobs */}
-        {!prefersReduced && (
-          <>
-            <div
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                top: '-15%',
-                left: '-8%',
-                width: '55%',
-                height: '65%',
-                borderRadius: '50%',
-                background: 'radial-gradient(ellipse, color-mix(in srgb, var(--color-accent) 18%, transparent), transparent 70%)',
-                filter: 'blur(48px)',
-                animation: 'hero-blob-1 12s ease-in-out infinite',
-                pointerEvents: 'none',
-                willChange: 'transform',
-              }}
-            />
-            <div
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                bottom: '-10%',
-                right: '-5%',
-                width: '45%',
-                height: '55%',
-                borderRadius: '50%',
-                background: 'radial-gradient(ellipse, color-mix(in srgb, var(--color-accent-2) 14%, transparent), transparent 70%)',
-                filter: 'blur(56px)',
-                animation: 'hero-blob-2 15s ease-in-out infinite',
-                pointerEvents: 'none',
-                willChange: 'transform',
-              }}
-            />
-          </>
-        )}
+        {/* Static accent glow — top-left compositional anchor */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: '-20%',
+            left: '-10%',
+            width: '40vw',
+            height: '50vh',
+            background: 'radial-gradient(ellipse at center, color-mix(in srgb, var(--color-accent) 10%, transparent), transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
 
         <div style={{ maxWidth: '72rem', margin: '0 auto', width: '100%', position: 'relative' }}>
           <div className="hero-layout">
@@ -265,7 +240,8 @@ export default function Hero() {
                 variants={itemVariants}
                 style={{
                   fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-                  fontWeight: 800,
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 700,
                   letterSpacing: '-0.03em',
                   lineHeight: 1.05,
                   color: 'var(--color-text)',
@@ -421,7 +397,6 @@ export default function Hero() {
               variants={terminalVariants}
               initial="hidden"
               animate="show"
-              style={{ display: 'none' }}
             >
               <TerminalCard />
             </m.div>

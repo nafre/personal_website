@@ -34,6 +34,7 @@ export default function Skills() {
             <h2
               style={{
                 fontSize: 'clamp(1.75rem, 3vw, 2rem)',
+                fontFamily: 'var(--font-display)',
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
                 color: 'var(--color-text)',
