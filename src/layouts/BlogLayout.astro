@@ -7,9 +7,10 @@ interface Props {
   description: string
   date: Date
   tags: string[]
+  readingTime?: number
 }
 
-const { title, description, date, tags } = Astro.props
+const { title, description, date, tags, readingTime } = Astro.props
 
 const formattedDate = new Intl.DateTimeFormat('en-US', {
   year: 'numeric',
@@ -19,11 +20,8 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
 ---
 
 <Layout title={`${title} — Mohamed Erfan`} description={description}>
-  <div class="mx-auto max-w-2xl px-6 py-24">
-    <a
-      href="/blog"
-      class="inline-flex items-center gap-2 text-sm text-[--color-muted] hover:text-[--color-accent] transition-colors mb-12 group"
-    >
+  <div class="post-wrapper">
+    <a href="/blog" class="back-link group">
       <Icon
         name="mdi:arrow-left"
         class="w-4 h-4 transition-transform group-hover:-translate-x-1"
@@ -32,26 +30,117 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     </a>
 
     <article>
-      <header class="mb-12">
-        <div class="flex flex-wrap gap-2 mb-4">
-          {tags.map((tag) => (
-            <span class="chip">{tag}</span>
-          ))}
+      <header class="post-header">
+        {tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map((tag) => (
+              <span class="chip">{tag}</span>
+            ))}
+          </div>
+        )}
+
+        <h1 class="post-title">{title}</h1>
+
+        <p class="post-description">{description}</p>
+
+        <div class="post-meta">
+          <time>{formattedDate}</time>
+          {readingTime && (
+            <>
+              <span aria-hidden="true">·</span>
+              <span>{readingTime} min read</span>
+            </>
+          )}
         </div>
-        <h1
-          class="text-3xl font-bold tracking-tight mb-4"
-          style="color: var(--color-text);"
-        >
-          {title}
-        </h1>
-        <p class="text-sm" style="color: var(--color-muted);">
-          {formattedDate}
-        </p>
+
+        <hr class="post-divider" />
       </header>
 
       <div class="prose prose-lg">
         <slot />
       </div>
+
+      <footer class="post-footer">
+        <hr class="post-divider" />
+        <a href="/blog" class="back-link group">
+          <Icon
+            name="mdi:arrow-left"
+            class="w-4 h-4 transition-transform group-hover:-translate-x-1"
+          />
+          Back to blog
+        </a>
+      </footer>
     </article>
   </div>
 </Layout>
+
+<style>
+  .post-wrapper {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 5rem 1.5rem 6rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    margin-bottom: 3rem;
+  }
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  .post-header {
+    margin-bottom: 0;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .post-title {
+    font-size: clamp(1.875rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin: 0 0 1rem;
+  }
+
+  .post-description {
+    font-size: 1.125rem;
+    color: var(--color-muted);
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--color-subtle);
+    margin: 0;
+  }
+
+  .post-divider {
+    border: none;
+    border-top: 1px solid var(--color-border);
+    margin: 1.75rem 0;
+  }
+
+  .post-footer {
+    margin-top: 0;
+  }
+  .post-footer .back-link {
+    margin-bottom: 0;
+  }
+</style>
