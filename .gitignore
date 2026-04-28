@@ -6,6 +6,8 @@ node_modules
 dist
 dist-ssr
 build
+.vercel
+.vercel/*
 
 # Logs
 logs
@@ -30,3 +32,4 @@ yarn-error.log*
 *.sln
 *.sw?
 .env.example
+local.env

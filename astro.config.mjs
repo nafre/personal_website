@@ -5,7 +5,7 @@ import icon from 'astro-icon'
 import vercel from '@astrojs/vercel'
 
 export default defineConfig({
-  site: 'https://erfan.dev',
+  site: 'https://mderfan.com',
   adapter: vercel(),
   integrations: [
     react(),

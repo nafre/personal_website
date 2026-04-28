@@ -68,7 +68,7 @@ CONTACT_ALLOWED_ORIGIN=http://localhost:4321
 |---|---|
 | `SUPABASE_URL` | your project URL |
 | `SUPABASE_SERVICE_ROLE_KEY` | your service role key |
-| `CONTACT_ALLOWED_ORIGIN` | `https://erfan.dev` |
+| `CONTACT_ALLOWED_ORIGIN` | `https://mderfan.com` |
 
 ---
 
