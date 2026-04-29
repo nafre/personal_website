@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { LazyMotion, domAnimation, m, AnimatePresence } from 'framer-motion'
-import { navLinks } from '../data/content.js'
+import { navLinks, site } from '../data/content.js'
 
 const SunIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -126,10 +126,10 @@ export default function Nav() {
             }}
           >
             <span style={{ fontSize: '0.9375rem', fontFamily: 'var(--font-display)', fontWeight: 600, color: 'var(--color-text)' }}>
-              Mohamed Erfan
+              {site.name}
             </span>
             <span style={{ fontSize: '0.75rem', color: 'var(--color-accent)', fontWeight: 500 }}>
-              Backend Engineer
+              {site.role}
             </span>
           </a>
 

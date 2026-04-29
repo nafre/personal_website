@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import { LazyMotion, domAnimation, m, AnimatePresence, useReducedMotion } from 'framer-motion'
-import { site } from '../data/content.js'
+import { site, contact } from '../data/content.js'
 import { fadeUp, stagger } from '../lib/motion'
 
 const GitHubIcon = () => (
@@ -93,15 +93,15 @@ export default function Contact() {
       }
 
       if (res.status === 429) {
-        setServerError('Too many requests. Please wait 15 minutes before trying again.')
+        setServerError(contact.errors.rateLimit)
         setFormState('error')
         return
       }
 
-      setServerError('Something went wrong. Please try again or email me directly.')
+      setServerError(contact.errors.generic)
       setFormState('error')
     } catch {
-      setServerError('Network error. Please check your connection and try again.')
+      setServerError(contact.errors.network)
       setFormState('error')
     }
   }
@@ -149,7 +149,7 @@ export default function Contact() {
                   marginTop: '0.25rem',
                 }}
               >
-                Let&apos;s work together.
+                {contact.heading}
               </m.h2>
 
               <m.p
@@ -161,8 +161,7 @@ export default function Contact() {
                   marginTop: '0.75rem',
                 }}
               >
-                I&apos;m open to backend, fintech, and payments opportunities. If you&apos;re building
-                something where reliability matters, let&apos;s talk.
+                {contact.tagline}
               </m.p>
             </div>
 
@@ -340,10 +339,10 @@ export default function Contact() {
                       >
                         <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
                       </svg>
-                      Sending…
+                      {contact.buttons.sending}
                     </>
                   ) : (
-                    'Send Message'
+                    contact.buttons.submit
                   )}
                 </m.button>
 
@@ -358,7 +357,7 @@ export default function Contact() {
                   onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-accent)')}
                   onMouseLeave={e => (e.currentTarget.style.color = 'var(--color-muted)')}
                 >
-                  or email me directly
+                  {contact.fallback}
                 </a>
               </div>
             </m.form>
@@ -384,7 +383,7 @@ export default function Contact() {
                     fontWeight: 500,
                   }}
                 >
-                  Message sent! I&apos;ll get back to you soon.
+                  {contact.success}
                 </m.div>
               )}
             </AnimatePresence>

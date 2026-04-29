@@ -20,6 +20,7 @@ export const site = {
   name: 'Mohamed Erfan',
   role: 'Software Engineer',
   location: 'Kuala Lumpur, Malaysia',
+  countryCode: 'MY',
   email: 'erfansiraj97@gmail.com',
   shortBio:
     "I design and build the systems you don't see, but rely on every day.",
@@ -30,9 +31,13 @@ export const site = {
   focus: 'Backend, design systems',
   availability: 'Available for full-time roles — Q3 2026',
   photo: '/images/avatar.jpg', // place your photo at public/images/avatar.jpg; set to '' to hide
+  url: 'https://mderfan.com',
+  ogImage: 'https://mderfan.com/og.png',
+  defaultTitle: 'Mohamed Erfan — Backend Engineer | Fintech, Payments & Insurance Infrastructure',
+  defaultDescription: "Mohamed Erfan is a backend engineer in Kuala Lumpur with 6+ years in fintech — building Mastercard's payment gateway and Guidewire's APAC insurance platform. Specialises in Java, Spring Boot, Kafka, and distributed systems at scale.",
   socials: {
-    github: 'https://github.com/nafre/', 
-    linkedin: 'https://www.linkedin.com/in/mohderfan/', 
+    github: 'https://github.com/nafre/',
+    linkedin: 'https://www.linkedin.com/in/mohderfan/',
     email: 'mailto:erfansiraj97@gmail.com',
   },
 }
@@ -155,6 +160,7 @@ export const skills = [
       { name: 'PostgreSQL',  icon: 'simple-icons:postgresql',  color: '#4169E1' },
       { name: 'Kafka',       icon: 'simple-icons:apachekafka', color: '#818cf8' },
       { name: 'Docker',      icon: 'simple-icons:docker',      color: '#2496ED' },
+      { name: 'Datadog',     icon: 'simple-icons:datadog',     color: '#632CA6' },
     ],
   },
   {
@@ -205,3 +211,36 @@ export const navLinks = [
   { href: '/#contact', label: 'Contact' },
   { href: '/blog', label: 'Blog' },
 ]
+
+export const blog = {
+  title: 'Blog — Mohamed Erfan',
+  description: 'Writing on backend engineering, distributed systems, and lessons from production.',
+  intro: 'On backend engineering, distributed systems, and the occasional lesson learned the hard way in production.',
+}
+
+export const hero = {
+  specialties: ['Fintech & Payments', 'System Architecture', 'API Design', 'Backend Infrastructure', 'A.I. Overseer'],
+  cta: 'View my work',
+  terminal: {
+    filename: 'engineer.config.ts',
+    comment: '// full-stack engineer · KL',
+    company: 'Endava · Mastercard',
+    stack: ['Java', 'Spring Boot', 'React'],
+  },
+}
+
+export const contact = {
+  heading: "Let's work together.",
+  tagline: "I'm open to backend, fintech, and payments opportunities. If you're building something where reliability matters, let's talk.",
+  buttons: {
+    submit: 'Send Message',
+    sending: 'Sending…',
+  },
+  success: "Message sent! I'll get back to you soon.",
+  fallback: 'or email me directly',
+  errors: {
+    rateLimit: 'Too many requests. Please wait 15 minutes before trying again.',
+    generic: 'Something went wrong. Please try again or email me directly.',
+    network: 'Network error. Please check your connection and try again.',
+  },
+}

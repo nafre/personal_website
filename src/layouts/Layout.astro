@@ -2,6 +2,7 @@
 import Nav from '../components/Nav'
 import Footer from '../components/Footer.astro'
 import '../styles/global.css'
+import { site, experience } from '../data/content.js'
 
 interface Props {
   title?: string
@@ -11,37 +12,34 @@ interface Props {
 }
 
 const {
-  title = 'Mohamed Erfan — Backend Engineer | Fintech, Payments & Insurance Infrastructure',
-  description = 'Mohamed Erfan is a backend engineer in Kuala Lumpur with 6+ years in fintech — building Mastercard\'s payment gateway and Guidewire\'s APAC insurance platform. Specialises in Java, Spring Boot, Kafka, and distributed systems at scale.',
-  ogImage = 'https://mderfan.com/og.png',
-  canonical = 'https://mderfan.com/',
+  title = site.defaultTitle,
+  description = site.defaultDescription,
+  ogImage = site.ogImage,
+  canonical = site.url + '/',
 } = Astro.props
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
-  name: 'Mohamed Erfan',
-  jobTitle: 'Software Engineer',
-  email: 'mailto:erfansiraj97@gmail.com',
-  url: 'https://mderfan.com',
-  image: 'https://mderfan.com/images/avatar.jpg',
+  name: site.name,
+  jobTitle: site.role,
+  email: site.socials.email,
+  url: site.url,
+  image: site.url + site.photo,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Kuala Lumpur',
-    addressCountry: 'MY',
+    addressLocality: site.location.split(', ')[0],
+    addressCountry: site.countryCode,
   },
   worksFor: {
     '@type': 'Organization',
-    name: 'Endava',
+    name: experience[0].company,
   },
   alumniOf: {
     '@type': 'EducationalOrganization',
-    name: 'Universiti Sains Malaysia',
+    name: experience[experience.length - 1].company,
   },
-  sameAs: [
-    'https://github.com/nafre/',
-    'https://www.linkedin.com/in/mohderfan/',
-  ],
+  sameAs: [site.socials.github, site.socials.linkedin],
 }
 ---
 
@@ -88,14 +86,14 @@ const jsonLd = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:alt" content="Mohamed Erfan — Backend Engineer portfolio" />
+    <meta property="og:image:alt" content={`${site.name} — Backend Engineer portfolio`} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="Mohamed Erfan — Backend Engineer portfolio" />
+    <meta name="twitter:image:alt" content={`${site.name} — Backend Engineer portfolio`} />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

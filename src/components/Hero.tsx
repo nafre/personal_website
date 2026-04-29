@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
-import { site, stats, navLinks } from '../data/content.js'
+import { site, stats, navLinks, hero } from '../data/content.js'
 import { heroStagger, fadeUp, stagger } from '../lib/motion'
 
 /* ─── Icons ─────────────────────────────────────────────────── */
@@ -118,7 +118,8 @@ function CodeProp({ k, v, type }: { k: string; v: string; type: 'str' | 'arr' | 
 }
 
 /* ─── Terminal card ──────────────────────────────────────────── */
-function TerminalCard() {
+function TerminalCard({ yearsOfExp }: { yearsOfExp: number }) {
+  const stackStr = `[${hero.terminal.stack.map((s: string) => `"${s}"`).join(', ')}]`
   return (
     <div className="terminal-card" aria-hidden="true">
       <div className="terminal-card-header">
@@ -126,18 +127,18 @@ function TerminalCard() {
         <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#f59e0b', flexShrink: 0 }} />
         <div style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#22c55e', flexShrink: 0 }} />
         <span style={{ marginLeft: '0.5rem', fontSize: '0.75rem', color: 'var(--color-muted)', fontFamily: 'var(--font-mono)' }}>
-          engineer.config.ts
+          {hero.terminal.filename}
         </span>
       </div>
       <div style={{ padding: '1.25rem 1.5rem', fontFamily: 'var(--font-mono)', fontSize: '0.8125rem', lineHeight: 1.9 }}>
-        <CodeLine comment="// full-stack engineer · KL" />
+        <CodeLine comment={hero.terminal.comment} />
         <CodeLine keyword="const" name=" config" op=" = {" />
-        <CodeProp k="name"       v={'"Mohamed Erfan"'}         type="str" />
-        <CodeProp k="role"       v={'"Software Engineer"'}     type="str" />
-        <CodeProp k="company"    v={'"Endava · Mastercard"'}   type="str" />
-        <CodeProp k="stack"      v={'["Java", "Spring Boot", "React"]'} type="arr" />
-        <CodeProp k="experience" v={'"6+ years"'}              type="str" />
-        <CodeProp k="available"  v="true"                      type="bool" />
+        <CodeProp k="name"       v={`"${site.name}"`}             type="str" />
+        <CodeProp k="role"       v={`"${site.role}"`}             type="str" />
+        <CodeProp k="company"    v={`"${hero.terminal.company}"`} type="str" />
+        <CodeProp k="stack"      v={stackStr}                     type="arr" />
+        <CodeProp k="experience" v={`"${yearsOfExp}+ years"`}     type="str" />
+        <CodeProp k="available"  v="true"                         type="bool" />
         <CodeLine op="}" />
       </div>
     </div>
@@ -145,8 +146,6 @@ function TerminalCard() {
 }
 
 /* ─── Component ─────────────────────────────────────────────── */
-const SPECIALTIES = ['Fintech & Payments', 'System Architecture', 'API Design', 'Backend Infrastructure', 'A.I. Overseer']
-
 export default function Hero() {
   const prefersReduced = useReducedMotion()
   const currentYear = new Date().getFullYear()
@@ -161,7 +160,7 @@ export default function Hero() {
   const yearsCount    = useCountUp(yearsOfExp, 900, countTrigger, !!prefersReduced)
   const projectsCount = useCountUp(10, 700, countTrigger, !!prefersReduced)
 
-  const { text: specialty, cursorOn } = useTypewriter(SPECIALTIES, 75, 2200, !!prefersReduced)
+  const { text: specialty, cursorOn } = useTypewriter(hero.specialties, 75, 2200, !!prefersReduced)
 
   const containerVariants     = prefersReduced ? { hidden: {}, show: {} } : heroStagger
   const itemVariants          = prefersReduced ? { hidden: { opacity: 0 }, show: { opacity: 1 } } : fadeUp
@@ -352,7 +351,7 @@ export default function Hero() {
                     border: '1px solid transparent',
                   }}
                 >
-                  View my work
+                  {hero.cta}
                 </m.a>
               </m.div>
 
@@ -398,7 +397,7 @@ export default function Hero() {
               initial="hidden"
               animate="show"
             >
-              <TerminalCard />
+              <TerminalCard yearsOfExp={yearsOfExp} />
             </m.div>
 
           </div>
