@@ -31,10 +31,13 @@ export const POST: APIRoute = async ({ request }) => {
       headers: { 'Content-Type': 'application/json' },
     })
 
-  // 1. Origin validation — blocks cross-origin POST requests
-  const origin = request.headers.get('origin') ?? ''
-  if (origin !== import.meta.env.CONTACT_ALLOWED_ORIGIN) {
-    return new Response(null, { status: 403 })
+  // 1. Origin validation — blocks cross-origin POST requests (skipped in dev)
+  if (!import.meta.env.DEV) {
+    const origin = request.headers.get('origin') ?? ''
+    const normalise = (o: string) => { try { return new URL(o).hostname.replace(/^www\./, '') } catch { return '' } }
+    if (normalise(origin) !== normalise(import.meta.env.CONTACT_ALLOWED_ORIGIN)) {
+      return new Response(null, { status: 403 })
+    }
   }
 
   // 2. Parse body
