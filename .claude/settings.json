@@ -8,7 +8,9 @@
       "mcp__Claude_Preview__preview_screenshot",
       "mcp__Claude_Preview__preview_console_logs",
       "mcp__Claude_Preview__preview_start",
-      "mcp__Claude_Preview__preview_resize"
+      "mcp__Claude_Preview__preview_resize",
+      "Skill(humanizer)",
+      "Skill(humanizer:*)"
     ]
   },
   "enabledPlugins": {

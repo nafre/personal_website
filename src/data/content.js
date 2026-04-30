@@ -25,8 +25,8 @@ export const site = {
   shortBio:
     "I design and build the systems you don't see, but rely on every day.",
   longBio: [
-    "Six years ago I wrote my first production Java service. Since then I've been in the backend trenches of fintech — four years building Guidewire's localized insurance platform across APAC, and now working on Mastercard's payment processor at Endava. The common thread: systems where failure isn't an option.",
-    "My best work lives where engineering rigor meets product thinking: APIs that are easy to reason about, services that hold under load, and codebases the next team can actually maintain. I've led a team through a full release cycle and mentored engineers along the way. I write things down.",
+    "Six years ago I wrote my first production Java service. Since then I've been deep in backend fintech — four years at Guidewire building a localized insurance platform for APAC, and now working on Mastercard's payment processor at Endava. The kind of software where nobody notices when it works.",
+    "The work I'm proudest of tends to be unglamorous: APIs that are easy to reason about, services that don't fall over, codebases the next team can actually navigate. I've led a team through a full release cycle and mentored engineers along the way. I write things down.",
   ],
   focus: 'Backend, design systems',
   availability: 'Available for full-time roles — Q3 2026',
@@ -61,7 +61,7 @@ export const projects = [
     title: 'Guidewire Insurance Suite',
     tagline: 'P&C insurance platform built for APAC compliance',
     description:
-      "Localized Guidewire's P&C insurance suite for Australia and New Zealand — implementing GST, regional compliance, and language requirements. Led a team of six through a full release cycle, shipping software relied on by insurers managing substantial risk portfolios.",
+      "Localized Guidewire's P&C insurance suite for Australia and New Zealand — GST, regional compliance, and language requirements. Led a team of six through a full release cycle; the software runs in production for insurers across APAC.",
     tags: ['Java', 'CI/CD', 'TeamCity'],
     year: '2023',
     link: 'https://www.guidewire.com/resources/blog/technology/new-features-for-go-australia-in-garmisch',
@@ -98,7 +98,7 @@ export const experience = [
     role: 'Software Engineer',
     period: '2025 — Present',
     summary:
-      "Building Mastercard's payment processor service — the critical path that validates transactions and routes them to the acquirer. Designed for millions of daily transactions, zero tolerance for downtime.",
+      "Building Mastercard's payment processor — validates transactions and routes them to the acquirer. Millions of transactions a day, all real money, so it has to work.",
   },
   {
     company: 'Guidewire Software',
