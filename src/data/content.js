@@ -3,15 +3,20 @@
 
 /**
  * @typedef {Object} SiteConfig
- * @property {string}   name         - Full display name; used in Nav logo, Hero, About, Footer, and index.html (keep in sync)
- * @property {string}   role         - Job title; shown in Hero and About sidebar
- * @property {string}   location     - City, Country; shown in About sidebar
- * @property {string}   email        - Raw email address (no mailto:); used in About card and Contact section
- * @property {string}   shortBio     - One-sentence bio shown below the hero headline
- * @property {string[]} longBio      - Array of paragraph strings rendered in the About section body
- * @property {string}   focus        - Short phrase for the About sidebar "Focus" row
- * @property {string}   availability - Availability badge string shown in Hero
- * @property {string}   [photo]      - Path to avatar image; set to '' to hide
+ * @property {string}   name               - Full display name; used in Nav logo, Hero, About, Footer, and index.html (keep in sync)
+ * @property {string}   role               - Job title; shown in Hero and About sidebar
+ * @property {string}   location           - City, Country; shown in About sidebar
+ * @property {string}   countryCode        - ISO 3166-1 alpha-2 country code; used in JSON-LD address
+ * @property {string}   email              - Raw email address (no mailto:); used in About card and Contact section
+ * @property {string}   shortBio           - One-sentence bio shown below the hero headline
+ * @property {string[]} longBio            - Array of paragraph strings rendered in the About section body
+ * @property {string}   focus              - Short phrase for the About sidebar "Focus" row
+ * @property {string}   availability       - Availability badge string shown in Hero
+ * @property {string}   [photo]            - Path to avatar image; set to '' to hide
+ * @property {string}   url                - Canonical site URL (no trailing slash)
+ * @property {string}   ogImage            - Absolute URL of the default Open Graph image
+ * @property {string}   defaultTitle       - Default <title> used when no page-specific title is set
+ * @property {string}   defaultDescription - Default meta description
  * @property {{ github: string, linkedin: string, email: string }} socials - href-ready URLs (email should include mailto:)
  */
 

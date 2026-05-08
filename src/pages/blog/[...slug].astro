@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props
 const { Content } = await render(post)
 
-const words = post.body.split(/\s+/).filter(Boolean).length
+const words = (post.body ?? '').split(/\s+/).filter(Boolean).length
 const readingTime = Math.max(1, Math.ceil(words / 200))
 ---
 

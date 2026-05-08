@@ -9,7 +9,7 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
 
 const readingTimes = new Map(
   posts.map((post) => {
-    const words = post.body.split(/\s+/).filter(Boolean).length
+    const words = (post.body ?? '').split(/\s+/).filter(Boolean).length
     return [post.id, Math.max(1, Math.ceil(words / 200))]
   })
 )

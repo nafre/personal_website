@@ -46,6 +46,11 @@ export default function Nav() {
     // Sync to the real theme after hydration (the inline script in Layout.astro
     // has already set the 'dark' class on <html> before React runs)
     setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light')
+
+    const syncTheme = () =>
+      setTheme(document.documentElement.classList.contains('dark') ? 'dark' : 'light')
+    window.addEventListener('theme-updated', syncTheme)
+    return () => window.removeEventListener('theme-updated', syncTheme)
   }, [])
 
   useEffect(() => {

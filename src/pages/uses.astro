@@ -1,0 +1,162 @@
+---
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout
+  title="Uses — Mohamed Erfan"
+  description="The tools, editors, and software Mohamed Erfan uses daily as a backend engineer building fintech systems."
+>
+  <section style="padding: 6rem 1.5rem 8rem;">
+    <div style="max-width: 48rem; margin: 0 auto;">
+
+      <a href="/" style="display: inline-flex; align-items: center; gap: 0.375rem; font-size: 0.8125rem; font-weight: 500; color: var(--color-muted); text-decoration: none; margin-bottom: 2.5rem;" class="back-link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+        Back
+      </a>
+
+      <span class="section-label">Setup</span>
+      <h1 style="font-size: clamp(2rem, 5vw, 3rem); font-family: var(--font-display); font-weight: 700; letter-spacing: -0.03em; color: var(--color-text); margin-bottom: 0.75rem; line-height: 1.1;">
+        Things I use
+      </h1>
+      <p style="font-size: 1.0625rem; color: var(--color-muted); line-height: 1.8; max-width: 36rem; margin-bottom: 4.5rem;">
+        Tools, software, and gear I reach for every day as a backend engineer building fintech systems.
+      </p>
+
+      <div class="uses-category">
+        <h2>Editor &amp; Terminal</h2>
+        <ul class="uses-list">
+          <li>
+            <div class="uses-name">IntelliJ IDEA</div>
+            <div class="uses-desc">Primary IDE for Java and Spring Boot. The refactoring tooling and debugger alone make it worth the license.</div>
+          </li>
+          <li>
+            <div class="uses-name">VS Code</div>
+            <div class="uses-desc">Everything else — TypeScript, React, config files, this portfolio. Fast to open and stays out of the way.</div>
+          </li>
+          <li>
+            <div class="uses-name">Windows Terminal</div>
+            <div class="uses-desc">Multiple panes and profiles with WSL. A long overdue upgrade from the default console.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="uses-category">
+        <h2>Languages &amp; Frameworks</h2>
+        <ul class="uses-list">
+          <li>
+            <div class="uses-name">Java 17+</div>
+            <div class="uses-desc">Workhorse language for production backend services. Records, sealed classes, and pattern matching have made it considerably more pleasant to write.</div>
+          </li>
+          <li>
+            <div class="uses-name">Spring Boot</div>
+            <div class="uses-desc">REST APIs and service infrastructure. Convention over configuration — mostly stays out of the way until you need to go off-script.</div>
+          </li>
+          <li>
+            <div class="uses-name">TypeScript</div>
+            <div class="uses-desc">Frontend, scripting, and any Node tooling. I don't write untyped JavaScript anymore.</div>
+          </li>
+          <li>
+            <div class="uses-name">Astro + React</div>
+            <div class="uses-desc">This site is built on Astro with React islands. Islands architecture is the right call for a mostly-static portfolio that still needs interactive components.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="uses-category">
+        <h2>Infrastructure &amp; Data</h2>
+        <ul class="uses-list">
+          <li>
+            <div class="uses-name">Apache Kafka</div>
+            <div class="uses-desc">Event streaming for payment flows. When you need guaranteed ordering and high throughput for financial transactions, the alternatives don't really compare.</div>
+          </li>
+          <li>
+            <div class="uses-name">PostgreSQL</div>
+            <div class="uses-desc">Go-to relational database for greenfield work. Extensions, JSONB support, and a sane query planner.</div>
+          </li>
+          <li>
+            <div class="uses-name">Oracle SQL</div>
+            <div class="uses-desc">For the financial systems that have been running since before I was born and aren't going anywhere.</div>
+          </li>
+          <li>
+            <div class="uses-name">Docker</div>
+            <div class="uses-desc">Local dev and containerized deployments. Compose files for spinning up full service stacks with a single command.</div>
+          </li>
+          <li>
+            <div class="uses-name">Datadog</div>
+            <div class="uses-desc">Observability for production. Custom dashboards, APM traces, and log correlation — saved meaningful time during more than a few incidents.</div>
+          </li>
+          <li>
+            <div class="uses-name">Jenkins / TeamCity</div>
+            <div class="uses-desc">CI/CD pipelines. TeamCity at Guidewire, Jenkins at Endava. They both get the job done.</div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="uses-category">
+        <h2>AI &amp; Productivity</h2>
+        <ul class="uses-list">
+          <li>
+            <div class="uses-name">Claude Code</div>
+            <div class="uses-desc">AI coding assistant for non-trivial tasks — architecture discussion, code review, and this portfolio was largely built alongside it. The CLI integration keeps me in the terminal.</div>
+          </li>
+          <li>
+            <div class="uses-name">GitHub Copilot</div>
+            <div class="uses-desc">In-editor completions for the boilerplate I'd rather not type twice. Particularly useful for repetitive Java patterns.</div>
+          </li>
+          <li>
+            <div class="uses-name">Postman</div>
+            <div class="uses-desc">API testing and collection management. Still the most practical tool for exploring REST APIs with teams.</div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    .back-link:hover { color: var(--color-accent); }
+
+    .uses-category {
+      margin-bottom: 3.5rem;
+    }
+    .uses-category h2 {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.625rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .uses-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.375rem;
+    }
+    .uses-list li {
+      display: grid;
+      grid-template-columns: 9rem 1fr;
+      gap: 1.5rem;
+      align-items: baseline;
+    }
+    @media (max-width: 560px) {
+      .uses-list li {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+      }
+    }
+    .uses-name {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-text);
+    }
+    .uses-desc {
+      font-size: 0.875rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+    }
+  </style>
+</Layout>

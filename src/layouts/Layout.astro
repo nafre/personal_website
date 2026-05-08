@@ -1,6 +1,8 @@
 ---
 import Nav from '../components/Nav'
 import Footer from '../components/Footer.astro'
+import ScrollProgress from '../components/ScrollProgress'
+import CommandPalette from '../components/CommandPalette'
 import '../styles/global.css'
 import { site, experience } from '../data/content.js'
 
@@ -103,6 +105,8 @@ const jsonLd = {
   </head>
 
   <body>
+    <ScrollProgress client:load />
+    <CommandPalette client:load />
     <Nav client:load />
     <main>
       <slot />

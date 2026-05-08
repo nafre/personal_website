@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { LazyMotion, domAnimation, m, useReducedMotion } from 'framer-motion'
+import { useState, useEffect, useCallback } from 'react'
+import { LazyMotion, domAnimation, m, AnimatePresence, useReducedMotion } from 'framer-motion'
 import { site, stats, navLinks, hero } from '../data/content.js'
 import { heroStagger, fadeUp, stagger } from '../lib/motion'
+import { useKonami } from '../hooks/useKonami'
 
 /* ─── Icons ─────────────────────────────────────────────────── */
 const GitHubIcon = () => (
@@ -152,10 +153,18 @@ export default function Hero() {
   const yearsOfExp = currentYear - stats.careerStartYear
 
   const [countTrigger, setCountTrigger] = useState(false)
+  const [konamiActive, setKonamiActive] = useState(false)
+
   useEffect(() => {
     const t = setTimeout(() => setCountTrigger(true), 550)
     return () => clearTimeout(t)
   }, [])
+
+  const onKonami = useCallback(() => {
+    setKonamiActive(true)
+    setTimeout(() => setKonamiActive(false), 4000)
+  }, [])
+  useKonami(onKonami)
 
   const yearsCount    = useCountUp(yearsOfExp, 900, countTrigger, !!prefersReduced)
   const projectsCount = useCountUp(10, 700, countTrigger, !!prefersReduced)
@@ -419,6 +428,39 @@ export default function Hero() {
             <ChevronDownIcon />
           </div>
         )}
+
+        {/* Konami easter egg toast */}
+        <AnimatePresence>
+          {konamiActive && (
+            <m.div
+              key="konami"
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 20, scale: 0.95 }}
+              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              aria-live="polite"
+              style={{
+                position: 'fixed',
+                bottom: '2rem',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                zIndex: 9997,
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-accent)',
+                borderRadius: 'var(--radius-lg)',
+                padding: '0.875rem 1.375rem',
+                boxShadow: '0 0 0 4px color-mix(in srgb, var(--color-accent) 15%, transparent)',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.8125rem',
+                lineHeight: 1.7,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              <div style={{ color: 'var(--color-success)' }}>✓ Achievement unlocked: Konami Master</div>
+              <div style={{ color: 'var(--color-muted)' }}>sudo hire-me → {site.availability.toLowerCase()}</div>
+            </m.div>
+          )}
+        </AnimatePresence>
       </section>
     </LazyMotion>
   )
